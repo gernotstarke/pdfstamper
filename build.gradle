@@ -1,0 +1,7 @@
+// my first gradle buildfile
+
+project.description = 'PDF Stamper: Adds pagenumbers to pdf files'
+
+task helloWorld << {
+    println 'Hello world.'
+}
