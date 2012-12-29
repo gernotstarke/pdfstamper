@@ -12,6 +12,9 @@ class TestResources {
     final static TEST_RESOURCES_DIR = "./test/resources/"
     final static EMPTY_DIR          = TEST_RESOURCES_DIR + "EmptyDir/"
     final static DIR_WITH_ONE_PDF   = TEST_RESOURCES_DIR + "OnePdf/"
+    final static DIR_WITH_HUGE_PDF  = TEST_RESOURCES_DIR + "colored_XL_Pdf/"
     final static DIR_WITH_TWO_PDFs  = TEST_RESOURCES_DIR + "TwoPdfs/"
     final static DIR_WITH_MANY_PDFs = TEST_RESOURCES_DIR + "ManyPdfs/"
+
+    final static TARGET_DIR = "./targetDir/"
 }

@@ -33,6 +33,7 @@ class PdfPageNumberizer {
 
 
 
+
     PdfPageNumberizer( ) {
         sourceDir = "./sourceDir/"
         targetDir = "./targetDir/"
@@ -50,14 +51,21 @@ class PdfPageNumberizer {
      * Adding page numbers (aka "stamping") is performed upon a canvas.
      *
      * @param sourceFile is the original pdf, which is not modified.
+     * @param prefix is the (optional) prefix string, like "chapter-2" or such...
      *
      * @return number of pages found in this pdf
      * @author Gernot Starke
      *
      **/
-    def int numberizePagesInFile(String sourceFile, String targetFile, int pageNumberOffset) {
+    def int numberizePagesInFile(String sourceFile, String targetFile, int pageNumberOffset, String... prefix) {
         String textToStampOnPage
 
+        // make sure prefix is either a valid String or empty
+        prefix = prefix != null ? prefix : ""
+
+        assert prefix != null
+
+        // make sure source file exists, abort otherwise
         assert new File(sourceFile).exists()
 
         reader = initPdfReader( sourceFile )
@@ -79,8 +87,8 @@ class PdfPageNumberizer {
             PdfContentByte canvas =  stamper.getOverContent(currentPageInFile);
 
             // create the text we want to print as page number
-            textToStampOnPage = String.valueOf( pageNumberOffset + currentPageInFile )
-
+            // TODO: replace by method call textToStampOnPage = String.valueOf( pageNumberOffset + currentPageInFile )
+            textToStampOnPage = createStringToStampOnPage( currentPageInFile, pageNumberOffset, prefix)
             // do it, stamp the text onto the page
             stampSinglePage( canvas, postion, textToStampOnPage );
         }
@@ -133,8 +141,23 @@ class PdfPageNumberizer {
         return localStamper
     }
 
+    /**
+     *
+     * @param currentPageNumber what's the current page number in current file
+     * @param offset
+     * @param prefix
+     * @return the text to stamp on the page, in the form "Chapter 1 - page 12" or similar
+     */
+    public String createStringToStampOnPage( int currentPageNrInFile, int pageNumberOffset, String prefix) {
+        // ensure prefix is not null
+        prefix = prefix != null ? prefix : ""
+
+        return prefix + String.valueOf( pageNumberOffset + currentPageNrInFile )
+
+    }
 
     /**
+     * void stampSinglePage: adds text at specified position on a page, represented by canvas
      *
      * @param  canvas: the canvas to stamp on
      * @param  textToStamp: the string we have to print. Might contain a prefix.
@@ -163,12 +186,12 @@ class PdfPageNumberizer {
      * Determines the Point where the pagenumber shall be stamped.
      * PageNumbers are always stamped centered at the bottom.
      *
-     * @param currentPageInFile: what page is currently being processed?
+     * @param currentPageNumberInFile: what page is currently being processed?
      * @return Point, the location where the header shall be stamped
      */
-    private Point calculatePageNrPosition( int currentPageInFile ) {
-        Rectangle rectangle = reader.getPageSize(currentPageInFile);
-        return new Point((int) (rectangle.getRight()/2), (int)(rectangle.getHeight()-30));
+    private Point calculatePageNrPosition( int currentPageNumberInFile ) {
+        Rectangle rectangle = reader.getPageSize(currentPageNumberInFile);
+        return new Point((int) (rectangle.getRight()/2), 15 );
     }
 
 }
