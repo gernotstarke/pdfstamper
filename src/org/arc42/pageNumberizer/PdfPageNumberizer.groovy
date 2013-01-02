@@ -39,8 +39,21 @@ class PdfPageNumberizer {
         targetDir = "./targetDir/"
     }
 
+    /** convenience mathod, in case no prefix is given.
+     * (workaround, as Spockframework does currently not support optional method parameters)
+     *
+     * @param sourceFile
+     * @param targetFile
+     * @param pageNumberOffset
+     * @param prefix
+     * @return
+     */
+    def int numberizePagesInFile(String sourceFile, String targetFile, int pageNumberOffset) {
+        return numberizePagesInFile(sourceFile, targetFile, pageNumberOffset, "")
+    }
 
-    /**
+
+        /**
      * Adds pagenumbers to pdf file by taking sourceFile and duplicating it to targetFile
      *
      * Pagenumbers might begin with a number greater than one, as this file might follow
@@ -57,10 +70,10 @@ class PdfPageNumberizer {
      * @author Gernot Starke
      *
      **/
-    def int numberizePagesInFile(String sourceFile, String targetFile, int pageNumberOffset, String... prefix) {
+    def int numberizePagesInFile(String sourceFile, String targetFile, int pageNumberOffset, String prefix) {
         String textToStampOnPage
 
-        // make sure prefix is either a valid String or empty
+        // make sure the optional parameter prefix is either a valid String or empty
         prefix = prefix != null ? prefix : ""
 
         assert prefix != null
@@ -89,8 +102,9 @@ class PdfPageNumberizer {
             // create the text we want to print as page number
             // TODO: replace by method call textToStampOnPage = String.valueOf( pageNumberOffset + currentPageInFile )
             textToStampOnPage = createStringToStampOnPage( currentPageInFile, pageNumberOffset, prefix)
+
             // do it, stamp the text onto the page
-            stampSinglePage( canvas, postion, textToStampOnPage );
+            stampSinglePage( canvas, postion, Element.ALIGN_CENTER, textToStampOnPage );
         }
 
 
@@ -156,17 +170,19 @@ class PdfPageNumberizer {
 
     }
 
+
     /**
      * void stampSinglePage: adds text at specified position on a page, represented by canvas
      *
-     * @param  canvas: the canvas to stamp on
-     * @param  textToStamp: the string we have to print. Might contain a prefix.
+     * @param canvas: the canvas to stamp on
+     * @param textToStamp: the string we have to print. Might contain a prefix.
      *        Examples: "A-1", "42", "chapter 4, page 19"
-     * @param  postion: the position as iText-Point where we have to stamp
+     * @param postion: the position as iText-Point where we have to stamp
+     * @param alignment: left-aligned, right-aligned or centered:
      *
      * @author Gernot Starke
      **/
-    private void stampSinglePage( PdfContentByte canvas, Point position, String stringToPrint  ) {
+    private void stampSinglePage( PdfContentByte canvas, Point position, int alignment, String textToStamp  ) {
 
         /*
         * from the iText documentation:
@@ -174,8 +190,8 @@ class PdfPageNumberizer {
         *   PdfContentByte canvas, int alignment, Phrase phrase,
         *   float x, float y, float rotation)
          */
-        ColumnText.showTextAligned(canvas, Element.ALIGN_RIGHT,
-                new Phrase( stringToPrint ),
+        ColumnText.showTextAligned(canvas, alignment,
+                new Phrase( textToStamp ),
                 (float) position.getX(), (float) position.getY(), 0);
 
     }
@@ -193,5 +209,7 @@ class PdfPageNumberizer {
         Rectangle rectangle = reader.getPageSize(currentPageNumberInFile);
         return new Point((int) (rectangle.getRight()/2), 15 );
     }
+
+
 
 }

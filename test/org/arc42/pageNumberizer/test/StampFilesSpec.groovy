@@ -51,7 +51,7 @@ class StampFilesSpec extends Specification {
 
         when: "we numberize pages in this file and write the output to a target directory"
             totalNumberOfPagesStamped =
-                pdfPageNumberizer.numberizePagesInFile(sourceFile, targetFile, pageNumberOffset)
+                pdfPageNumberizer.numberizePagesInFile(sourceFile, targetFile, pageNumberOffset )
                 println totalNumberOfPagesStamped + " page(s) stamped in " + sourceFile
 
 
@@ -79,7 +79,7 @@ class StampFilesSpec extends Specification {
                 targetFile = targetDir + "stamped_" + filesToProcess[i]
 
                 totalNumberOfPagesStamped = totalNumberOfPagesStamped +
-                            pdfPageNumberizer.numberizePagesInFile( sourceFile, targetFile, totalNumberOfPagesStamped)
+                     pdfPageNumberizer.numberizePagesInFile( sourceFile, targetFile, totalNumberOfPagesStamped )
 
             }
 
@@ -103,7 +103,7 @@ class StampFilesSpec extends Specification {
                 targetFile = targetDir + "stamped_many_" + currentFileName
 
                 totalNumberOfPagesStamped = totalNumberOfPagesStamped +
-                            pdfPageNumberizer.numberizePagesInFile( sourceFile, targetFile, totalNumberOfPagesStamped)
+                     pdfPageNumberizer.numberizePagesInFile( sourceFile, targetFile, totalNumberOfPagesStamped )
 
             }
 

@@ -1,5 +1,7 @@
 package org.arc42.pageNumberizer
 
+import javax.swing.JFileChooser
+
 
 /**
  * Numberize a set of pdf files (aka "handout") with pagenumbers and optional
@@ -15,7 +17,15 @@ class NumberizeHandout {
 
     // prefer to have a main method
     static main(args) {
-        PdfPageNumberizer pdfPageNumberizer1 = new NumberizeHandout()
+        PdfPageNumberizer pdfPageNumberizer1 = new PdfPageNumberizer()
+
+
+        def openDirectoryDialog = new JFileChooser(
+                dialogTitle: "Choose a source directory file",
+
+                fileSelectionMode: JFileChooser.DIRECTORIES_ONLY )
+
+        openDirectoryDialog.showOpenDialog()
 
     }
 }
