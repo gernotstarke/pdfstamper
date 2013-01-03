@@ -13,26 +13,40 @@ import java.awt.*
 
 class NumberizerUI {
 
-    static final int DIR_TEXTFIELD_LENGTH = 50
+    /*
+     * the controller performs the stamping/numbering
+    */
+    Numberizer worker
 
-    private PdfPageNumberizer
+    /*
+     * the model (aka domain data)
+     */
+    StamperModel model
+
+
+    /*
+    * UI related attributes
+     */
+    private final int DIR_TEXTFIELD_LENGTH = 50
+
+    private final Dimension textFieldDimension = new Dimension(500, 30)
+
 
     private SwingBuilder swing = new SwingBuilder();
 
-    private String sourceDir
-    private String targetDir
 
     //some textfields we need
     private JTextField tf_sourceDir =
         swing.textField(id: "sourceDir",
                 horizontalAlignment: JTextField.LEFT,
-                preferredSize: [500, 30])
+                preferredSize: textFieldDimension)
 
     private JTextField tf_targetDir =
         swing.textField(id: "targetDir",
                 horizontalAlignment: JTextField.LEFT,
-                preferredSize: [500, 30])
+                preferredSize: textFieldDimension)
 
+    // todo: make tf_messages a TextArea
     private JTextField tf_messages =
         swing.textField(id: "messages",
                 horizontalAlignment: JTextField.LEFT,
@@ -42,17 +56,23 @@ class NumberizerUI {
     private JButton sourceSelectButton =
         swing.button(
                 text: "Source directory...",
-                actionPerformed: { this.chooseDirectory("Source directory", tf_sourceDir) })
+                actionPerformed: {
+                    model.setSourceDir( this.chooseDirectory("Source directory", tf_sourceDir))
+                }
+        )
 
     private JButton targetSelectButton =
         swing.button(
                 text: "Target directory...",
-                actionPerformed: { this.chooseDirectory("Target directory", tf_targetDir) })
+                actionPerformed: {
+                    model.setTargetDir( this.chooseDirectory("Target directory", tf_targetDir))
+                }
+        )
 
     private JButton startButton =
         swing.button(text: "Start!",
                 foreground: Color.BLUE,
-                actionPerformed: { this.stampFiles(sourceDir, targetDir) })
+                actionPerformed: { this.stampFiles( ) })
 
     private JButton cancelButton =
         swing.button(text: "Cancel",
@@ -66,13 +86,20 @@ class NumberizerUI {
                 foreground: Color.BLUE)
 
 
+
     private JFrame frame
 
 
 
+    public NumberizerUI( Numberizer p_worker, StamperModel p_model) {
+        worker = p_worker
+        model = p_model
 
-    public NumberizerUI() {
+    }
 
+
+
+    public void createUI() {
         frame = swing.frame(id: "numberizerFrame",
                 title: "Pdf File Numberizer", visible: true, resizable: false) {
 
@@ -99,7 +126,7 @@ class NumberizerUI {
                     widget(tf_sourceDir)
                     widget(tf_targetDir)
 
-                   glue()
+                    glue()
 
                     panel(id: "progressAndCancel") {
                         boxLayout(axis: BoxLayout.LINE_AXIS)
@@ -119,7 +146,7 @@ class NumberizerUI {
                     panel() {
                         boxLayout(axis: BoxLayout.LINE_AXIS)
                         glue()
-                        widget( arc42label)
+                        widget(arc42label)
                     }
                 }
 
@@ -133,23 +160,19 @@ class NumberizerUI {
             }
         }
 
-
+        // layout components and show!
         frame.pack()
         frame.setVisible(true)
-
-    }  // constructor
-
-
-    private void createUI() {
 
     }
 
 
-    private void chooseDirectory(String whichDirectory, JTextField textField) {
-        println "choosing directory"
+    private String chooseDirectory(String whichDirectory, JTextField textField) {
+        //println "choosing directory"
 
         String selectedDir
         String displayDir
+
 
         def openDirectoryDialog = new JFileChooser(
                 dialogTitle: whichDirectory,
@@ -166,17 +189,18 @@ class NumberizerUI {
             textField.text = displayDir
 
         }
-    }
-
-    // it's not great - but the UI acts as controller here...
-
-    def stampFiles(String sourceDir, String targetDir) {
+        return selectedDir
 
     }
 
-    public static void main(String[] args) {
-        NumberizerUI numberizerUI = new NumberizerUI()
+
+   /*
+   * delegate the stamping to worker
+    */
+    private void stampFiles() {
+        worker.numberizePdfFilesInDirectory( model )
 
     }
+
 
 }

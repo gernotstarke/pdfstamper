@@ -11,20 +11,17 @@ import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.PdfStamper
 
 /**
- * Created with IntelliJ IDEA.
- * User: gstarke
+ * Stamps (a.k.a. adds) pagenumbers and additional information onto pages of a Pdf file
+ *
+ * Contains all required method to process a single file.
+ *
+ * @author gstarke
  * Date: 16.12.12
- * Time: 17:05
- * 
+ *
  */
 
 class PdfPageNumberizer {
 
-    // location of pdf files to be stamped
-    private String sourceDir
-
-    // where to put finished pdf files
-    private String targetDir
 
 
     // PDF related stuff
@@ -35,8 +32,7 @@ class PdfPageNumberizer {
 
 
     PdfPageNumberizer( ) {
-        sourceDir = "./sourceDir/"
-        targetDir = "./targetDir/"
+
     }
 
     /** convenience mathod, in case no prefix is given.
