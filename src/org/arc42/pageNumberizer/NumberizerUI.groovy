@@ -2,61 +2,79 @@ package org.arc42.pageNumberizer
 
 import groovy.swing.SwingBuilder
 
-import javax.swing.BoxLayout
-import javax.swing.JFileChooser
-import javax.swing.JFrame
-import javax.swing.JLabel
-import javax.swing.JTextField
-import java.awt.BorderLayout
-import java.awt.Button
-import java.awt.Color
-import java.awt.Font
-
+import javax.swing.*
+import java.awt.*
 
 /**
- * Created with IntelliJ IDEA.
- * User: gstarke
+ * Swing UI to select source and target directories for PdfStamper.
+ * @author: gstarke
  * Date: 30.12.12
- * Time: 17:46
- *
  */
 
 class NumberizerUI {
 
     static final int DIR_TEXTFIELD_LENGTH = 50
 
-    def sb = new SwingBuilder();
+    private PdfPageNumberizer
 
-    String sourceDir
-    String targetDir
+    private SwingBuilder swing = new SwingBuilder();
 
-    // some UI components we need
-    JTextField tf_sourceDir
-    JTextField tf_targetDir
-    JTextField tf_messages
+    private String sourceDir
+    private String targetDir
 
-    JFrame frame
+    //some textfields we need
+    private JTextField tf_sourceDir =
+        swing.textField(id: "sourceDir",
+                horizontalAlignment: JTextField.LEFT,
+                preferredSize: [500, 30])
 
-    //Button startButton
+    private JTextField tf_targetDir =
+        swing.textField(id: "targetDir",
+                horizontalAlignment: JTextField.LEFT,
+                preferredSize: [500, 30])
+
+    private JTextField tf_messages =
+        swing.textField(id: "messages",
+                horizontalAlignment: JTextField.LEFT,
+                preferredSize: [500, 30])
+
+    // the buttons
+    private JButton sourceSelectButton =
+        swing.button(
+                text: "Source directory...",
+                actionPerformed: { this.chooseDirectory("Source directory", tf_sourceDir) })
+
+    private JButton targetSelectButton =
+        swing.button(
+                text: "Target directory...",
+                actionPerformed: { this.chooseDirectory("Target directory", tf_targetDir) })
+
+    private JButton startButton =
+        swing.button(text: "Start!",
+                foreground: Color.BLUE,
+                actionPerformed: { this.stampFiles(sourceDir, targetDir) })
+
+    private JButton cancelButton =
+        swing.button(text: "Cancel",
+                actionPerformed: { System.exit(0) })
+
+    // labels
+    private JLabel arc42label =
+        swing.label("arc42.org   ",
+                horizontalAlignment: JLabel.RIGHT,
+                font: ["Helvetica", Font.PLAIN, 9],
+                foreground: Color.BLUE)
+
+
+    private JFrame frame
+
+
+
 
     public NumberizerUI() {
 
-
-        frame = sb.frame( id: "numberizerFrame",
-                    title: "Pdf File Numberizer", visible: true, resizable: false) {
-
-            // create the Components we need to refer to later on...
-            tf_sourceDir = sb.textField(id: "sourceDir", horizontalAlignment: JTextField.LEFT, preferredSize: [500, 30])
-
-            tf_targetDir = sb.textField(id: "targetDir", horizontalAlignment: JTextField.LEFT, preferredSize: [500, 30])
-
-            tf_messages = sb.textField(id: "messages", horizontalAlignment: JTextField.LEFT, preferredSize: [500, 30])
-
-
-//            startButton = sb.button(text: "Start!",
-//                    foreground: Color.BLUE,
-//                    actionPerformed: {this.stampFiles( sourceDir, targetDir)}
-//            )
+        frame = swing.frame(id: "numberizerFrame",
+                title: "Pdf File Numberizer", visible: true, resizable: false) {
 
             // our main  panes
             panel(id: "main") {
@@ -69,21 +87,10 @@ class NumberizerUI {
                 panel(constraints: BorderLayout.LINE_START) {
                     gridLayout(columns: 1, rows: 4,)
 
-                    button(
-                            text: "Source directory...",
-                            actionPerformed: { this.chooseDirectory("Source directory", tf_sourceDir) })
-
-                    button(
-                            text: "Target directory...",
-                            actionPerformed: { this.chooseDirectory("Target directory", tf_targetDir) })
-
-                    label(" ")
-
-                    //widget( startButton )
-                    button(text: "Start!",
-                            foreground: Color.BLUE,
-                            actionPerformed: { this.stampFiles(sourceDir, targetDir) }
-                    )
+                    widget(sourceSelectButton)
+                    widget(targetSelectButton)
+                    glue()
+                    widget(startButton)
                 }
 
                 panel(id: "center", constraints: BorderLayout.CENTER) {
@@ -92,18 +99,16 @@ class NumberizerUI {
                     widget(tf_sourceDir)
                     widget(tf_targetDir)
 
-                    label(" ")
+                   glue()
 
                     panel(id: "progressAndCancel") {
                         boxLayout(axis: BoxLayout.LINE_AXIS)
-
-                        //progressBar(string: "processing")
-
-                        box()
-                        button(text: "Cancel", actionPerformed: { System.exit(0) })
+                        glue()
+                        progressBar(id: "progress", string: "processing", visible: false)
+                        glue()
+                        widget(cancelButton)
                     }
                 }
-
 
                 // panel with logo and arc42.org
                 panel(id: "logo", constraints: BorderLayout.LINE_END) {
@@ -112,25 +117,17 @@ class NumberizerUI {
                     label(icon: imageIcon(file: "./pdfstamper-logo.png"))
 
                     panel() {
-                        boxLayout( axis:  BoxLayout.LINE_AXIS)
-
-                        label(" ")
+                        boxLayout(axis: BoxLayout.LINE_AXIS)
                         glue()
-                        label("arc42.org   ",
-                                horizontalAlignment: JLabel.RIGHT,
-                                font: ["Helvetica", Font.PLAIN, 9],
-                                foreground: Color.BLUE)
+                        widget( arc42label)
                     }
                 }
 
-                //lower (south) part of frame - contains message area and arc42 hint
+                //lower (south) part of frame - contains messagePanel
                 panel(constraints: BorderLayout.PAGE_END) {
                     boxLayout(axis: BoxLayout.PAGE_AXIS)
-
                     separator()
-
                     widget(tf_messages)
-
                 }
 
             }
@@ -138,14 +135,17 @@ class NumberizerUI {
 
 
         frame.pack()
-        frame.setVisible( true )
+        frame.setVisible(true)
 
     }  // constructor
 
 
+    private void createUI() {
+
+    }
 
 
-    public void chooseDirectory(String whichDirectory, JTextField textField) {
+    private void chooseDirectory(String whichDirectory, JTextField textField) {
         println "choosing directory"
 
         String selectedDir
@@ -170,7 +170,7 @@ class NumberizerUI {
 
     // it's not great - but the UI acts as controller here...
 
-    void stampFiles(String sourceDir, String targetDir) {
+    def stampFiles(String sourceDir, String targetDir) {
 
     }
 
