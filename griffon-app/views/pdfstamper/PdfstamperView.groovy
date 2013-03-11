@@ -37,7 +37,7 @@ targetDirChooserWindow = fileChooser(
         dialogTitle: "please choose target directory")
 
 
-mainFrame = application(title: 'griffonPdfStamper',
+mainFrame = application(title: 'Pdf Stamper - arc42.org',
         //preferredSize: new Dimension(720, 240),
         pack: true,
         //location: [50,50],
