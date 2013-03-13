@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ************************************************************************/
+ *********************************************************************** */
 
 package pdfstamper
 
@@ -23,9 +23,8 @@ import javax.swing.BoxLayout
 import javax.swing.JFileChooser
 import java.awt.BorderLayout
 import java.awt.Color
+import java.awt.Desktop
 import java.awt.Dimension
-
-final Dimension textFieldDimension = new Dimension(500, 30)
 
 
 srcDirChooserWindow = fileChooser(
@@ -38,76 +37,116 @@ targetDirChooserWindow = fileChooser(
 
 
 mainFrame = application(title: 'Pdf Stamper - arc42.org',
-        //preferredSize: new Dimension(720, 240),
         pack: true,
-        //location: [50,50],
+        resizable: false,
         locationByPlatform: true,
-        iconImage: imageIcon('/griffon-icon-48x48.png').image,
-        iconImages: [imageIcon('/griffon-icon-48x48.png').image,
-                imageIcon('/griffon-icon-32x32.png').image,
-                imageIcon('/griffon-icon-16x16.png').image]) {
+        iconImage: imageIcon('/pdfstamper-logo.png').image,
+        iconImages: [imageIcon('/pdfstamper-logo-90px.png').image]) {
 
-        borderLayout()
+    panel(border: emptyBorder(6)) {
+        migLayout(layoutConstraints: 'fill')
 
-        label("", constraints: BorderLayout.PAGE_START)
+        bannerPanel(constraints: 'span 2, grow, wrap',
+                title: 'Pdf Stamper',
+                subtitle: 'add pagenumbers and headers to your pdf files...',
+                //border: lineBorder(GrayColor.BLACK, thickness: 1),
+                titleIcon: imageIcon('/pdfstamper-logo-90px.png'),
+                subTitleColor: Color.WHITE,
+                background: new Color(0, 0, 0, 1),
+                startColor: Color.LIGHT_GRAY,
+                endColor: Color.BLUE,
+                vertical: true
+        )
 
-        panel(constraints: BorderLayout.LINE_START) {
-            gridLayout(columns: 1, rows: 4, hgap: 6, vgap: 6)
+        panel(border: lineBorder(color: Color.BLUE, thickness: 1), constraints: 'grow, left, wrap, span 2') {
+            migLayout()
+
+            label('Directories', constraints: "wrap", foreground: Color.BLUE)
+
+            button('Source Directory', constraints: 'skip',
+                    actionPerformed: controller.selectSrcDir)
+            textField(columns: 40, id: 'sourceDir',
+                    text: bind('sourceDir',
+                            target: model,
+                            id: 'sourceDir')
+            )
+
+            label(id: 'nrOfPdfFilesFound',
+                    foreground: Color.LIGHT_GRAY,
+                    text: bind { model.nrOfFilesToStamp }
+            )
+            label(' Pdf files', foreground: Color.LIGHT_GRAY, constraints: 'wrap')
 
 
-            button( "Source directory...",
-                    actionPerformed:controller.selectSrcDir)
+            button('Target Directory', constraints: 'skip',
+                    actionPerformed: controller.selectTargetDir)
+            textField(columns: 40, constraints: 'wrap',
+                    id: "targetDir",
+                    text: bind('targetDir',
+                            target: model,
+                            id: 'targetDir')
+            )
+        }
 
-            button( "Target directory...",
-                    actionPerformed:controller.selectTargetDir)
-            glue()
-            button( "Start!", foreground: Color.BLUE,
-                    actionPerformed:controller.startStamping,
+
+        panel(border: lineBorder(color: Color.BLUE, thickness: 1), constraints: 'grow, span 2,wrap') {
+            migLayout()
+
+            label 'Configuration:', constraints: "wrap", foreground: Color.BLUE
+
+            label 'Header: ', constraints: 'left, skip'
+            textField(id: 'header', constraints: 'span, growx')
+
+            label 'File prefix: ', constraints: 'skip'
+            textField(columns: 20, id: 'filePrefix', constraints: 'wrap')
+
+            label 'Page number prefix: ', constraints: 'skip'
+            textField(columns: 20, id: 'pagePrefix', constraints: '')
+
+            label 'e.g.', foreground: Color.LIGHT_GRAY, constraints: ''
+            label 'Kap-1, Seite 14', id: 'sampleFooter',
+                    foreground: Color.LIGHT_GRAY,
+                    constraints: 'wrap'
+
+        }
+
+
+        panel(border: lineBorder(color: Color.BLUE, thickness: 1), constraints: 'grow, wrap') {
+            migLayout(constraints: '')
+            label 'Stamping:', constraints: "left, wrap", foreground: Color.BLUE
+
+            button('Start!', constraints: 'skip, spanx 2',
+                    actionPerformed: controller.startStamping,
                     enabled: bind { model.startButtonEnabled }
             )
-        }
-
-        panel(constraints: BorderLayout.CENTER) {
-            gridLayout(columns: 1, rows: 4, hgap: 6, vgap: 6)
-
-            textField(id: "sourceDir",
-                    columns: 60,
-                    text: bind('sourceDir', target:model,
-                            id:'sourceDir')
-            )
-
-            textField( id: "targetDir",
-                    columns: 60,
-                    text: bind( 'targetDir', target: model,
-                            id:'targetDir')
-            )
-
-            glue()
-
-            panel(id: "progressAndCancel") {
-                migLayout()
-
-                label( "files found: ")
-                label( text: bind {model.nrOfFilesToStamp }, id:'nrOfFilesToStamp', constraints: "wrap")
-
-                label( "pages stamped: ")
-                label( text: bind {model.totalNrOfPagesSoFar } )
-            }
-
+            label(text: bind { model.totalNrOfPagesSoFar }, id: 'NrOfPagesProcessed',
+                    foreground: Color.LIGHT_GRAY, constraints: '')
+            label(' pages already processed', foreground: Color.LIGHT_GRAY, constraints: '')
 
         }
 
-        panel(constraints: BorderLayout.LINE_END) {
-            boxLayout(axis: BoxLayout.PAGE_AXIS)
+        button('Cancel', constraints: 'right, wrap',
+                actionPerformed: controller.quit
+        )
 
-            label(icon: imageIcon("/pdfstamper-logo.png"))
+        jideButton(label: "free and open source: arc42.org",
+                foreground: Color.BLUE, constraints: 'right',
+                actionPerformed: {
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop desktop = Desktop.getDesktop();
+                        try {
+                            desktop.browse(new URI('http://www.arc42.org'))
+                        }
+                        catch (Exception ex) {
+                        }
+                    }
 
-            glue()
-            // label("arc42.org   ", font: ["Helvetica", Font.PLAIN, 9],  foreground: Color.BLUE)
-            glue()
-            button( text: "Cancel",
-                    actionPerformed:controller.quit)
-
-        }
-
+                }
+        )
     }
+
+}
+
+
+
+
