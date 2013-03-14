@@ -37,7 +37,6 @@ class PdfstamperModel {
     String targetDir = ""
 
     // configuration settings
-    Boolean addFileNumberPrefix = false
 
     String pagePrefix = "Seite "
     String filePrefix = "Kapitel "
@@ -51,6 +50,7 @@ class PdfstamperModel {
     int totalNrOfPagesSoFar = 0
     int nrOfFilesToStamp = 0
 
+    String footerSample = ""
 
     // start of stamping is only allowed, if:
     //   1.) source and target directories have been selected

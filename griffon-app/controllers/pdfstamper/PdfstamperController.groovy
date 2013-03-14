@@ -17,6 +17,10 @@
  * limitations under the License.
  ************************************************************************/
 
+/*
+ * @author Gernot Starke
+ *
+ */
 package pdfstamper
 
 import javax.swing.JFileChooser
@@ -66,6 +70,23 @@ class PdfstamperController {
         }
     }
 
+    def aboutAction = {
+        withMVCGroup('about') { m, v, c ->
+            c.show()
+        }
+    }
+    def onOSXAbout = { app ->
+        withMVCGroup('about') { m, v, c ->
+            c.show()
+        }
+    }
+
+
+//    def onOSXPrefs = { app ->
+//        withMVCGroup('preferences') { m, v, c ->
+//            c.show()
+//        }
+//    }
 
 
     def quit = {
