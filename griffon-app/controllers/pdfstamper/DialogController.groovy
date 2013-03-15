@@ -17,8 +17,7 @@
 package pdfstamper
 
 import griffon.transform.Threading
-
-import java.awt.*
+import java.awt.Window
 
 /**
  * @author Andres Almiray

@@ -22,7 +22,6 @@
 package pdfstamper
 
 import griffon.transform.Threading
-
 import javax.swing.SwingUtilities
 
 class AboutController extends DialogController {

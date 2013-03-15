@@ -45,8 +45,13 @@ panel(id: 'content') {
 
     button(creditsAction, constraints: 'left')
 
+    button(licenseAction, constraints: 'center')
+
+    button(hideAction, constraints: 'right, wrap')
+
+
     button(label: "arc42.org",
-            foreground: Color.BLUE, constraints: 'center',
+            foreground: Color.BLUE, constraints: "center, grow",
             actionPerformed: {
                 if (Desktop.isDesktopSupported()) {
                     Desktop desktop = Desktop.getDesktop();
@@ -58,8 +63,6 @@ panel(id: 'content') {
                 }
 
             })
-    button(licenseAction, constraints: 'right')
-
     keyStrokeAction(component: current,
             keyStroke: 'ESCAPE',
             condition: 'in focused window',
