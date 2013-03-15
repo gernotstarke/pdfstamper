@@ -44,13 +44,14 @@ class PdfstamperModel {
     // ************************************************
 
     String pagePrefix
+    String filePageSeparator
     String filePrefix
 
     String sampleFooter = ""
 
     def calcFooter = {
         //println 'called calcFooter with ' + filePrefix + ' ' + pagePrefix
-        sampleFooter =  filePrefix + ' 2, ' + pagePrefix + ' 42'
+        sampleFooter =  filePrefix + ' 2' + filePageSeparator + pagePrefix + ' 42'
     }
 
 
@@ -70,7 +71,7 @@ class PdfstamperModel {
     private enabler = { e ->
         startButtonEnabled =
             !isBlank(sourceDir) &&
-                    !isBlank(targetDir)
+            !isBlank(targetDir)
     }
 
 }

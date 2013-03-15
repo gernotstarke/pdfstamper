@@ -99,17 +99,27 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
                     text: bind { model.header })
 
             label 'File prefix: ', constraints: 'skip'
-            textField(columns: 20, id: 'filePrefix', constraints: 'wrap',
+            textField(columns: 15, id: 'filePrefix', constraints: 'wrap',
+                    text: bind( target:model,
+                                'filePrefix',
+                                value: 'Kapitel')
+            )
 
-                    text: bind( target:model, 'filePrefix', value: 'Kapitel')
+            label 'File / Page Separator: ', constraints: 'skip'
+            textField(columns: 15, id: 'filePageSeparator', constraints: 'wrap',
+                    text: bind( target:model,
+                                'filePageSeparator',
+                                value: ', ')
             )
 
             label 'Page number prefix: ', constraints: 'skip'
-            textField(columns: 20, id: 'pagePrefix', constraints: '',
-                    text: bind( target:model, 'pagePrefix', value: 'Seite')
+            textField(columns: 15, id: 'pagePrefix', constraints: '',
+                    text: bind( target:model,
+                                'pagePrefix',
+                                value: 'Seite')
             )
 
-            label 'e.g.', foreground: Color.LIGHT_GRAY, constraints: ''
+            label 'e.g.', foreground: Color.LIGHT_GRAY
             label( text: bind( source: model,
                             sourceProperty: 'sampleFooter',
                             sourceEvent: 'propertyChange',
