@@ -32,15 +32,13 @@ class PdfstamperController {
 
 
     void mvcGroupInit(Map<String, Object> args) {
-        println "this is mvcGroupInit"
-
-    }
+        }
 
 
     def startStamping = { evt = null ->
         println "starting to stamp in controller"
         // delegate to service
-        // TODO: ensure stampins is performed OUTSIDE of swing event loop!
+        // TODO: ensure stamping is performed OUTSIDE of swing event loop!
 
         execOutsideUI{
             stamperService.stampPdfFilesInDirectory( model )
@@ -56,8 +54,8 @@ class PdfstamperController {
             view.sourceDir.reverseUpdate()
 
             // update number of Pdf files found in source dir
-            model.nrOfFilesToStamp = stamperService.nrOfPdfFilesInDirectory( model.sourceDir )
-            //view.nrOfFilesToStamp.reverseUpdate()
+            model.nrOfFilesToStamp =
+                stamperService.nrOfPdfFilesInDirectory( model.sourceDir )
         }
     }
 

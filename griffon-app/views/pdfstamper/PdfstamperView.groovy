@@ -49,7 +49,6 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
         bannerPanel(constraints: 'span 2, grow, wrap',
                 title: 'Pdf Stamper',
                 subtitle: 'add pagenumbers and headers to your pdf files...',
-                //border: lineBorder(GrayColor.BLACK, thickness: 1),
                 titleIcon: imageIcon('/pdfstamper-logo-90px.png'),
                 subTitleColor: Color.WHITE,
                 background: new Color(0, 0, 0, 1),
@@ -95,18 +94,29 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
             label 'Configuration:', constraints: "wrap", foreground: Color.BLUE
 
             label 'Header: ', constraints: 'left, skip'
-            textField(id: 'header', constraints: 'span, growx')
+            textField(id: 'header', columns: 40,
+                    constraints: 'span, growx',
+                    text: bind { model.header })
 
             label 'File prefix: ', constraints: 'skip'
-            textField(columns: 20, id: 'filePrefix', constraints: 'wrap')
+            textField(columns: 20, id: 'filePrefix', constraints: 'wrap',
+
+                    text: bind( target:model, 'filePrefix', value: 'Kapitel')
+            )
 
             label 'Page number prefix: ', constraints: 'skip'
-            textField(columns: 20, id: 'pagePrefix', constraints: '')
+            textField(columns: 20, id: 'pagePrefix', constraints: '',
+                    text: bind( target:model, 'pagePrefix', value: 'Seite')
+            )
 
             label 'e.g.', foreground: Color.LIGHT_GRAY, constraints: ''
-            label 'Kap-1, Seite 14', id: 'sampleFooter',
+            label( text: bind( source: model,
+                            sourceProperty: 'sampleFooter',
+                            sourceEvent: 'propertyChange',
+                            converter: model.calcFooter),
                     foreground: Color.LIGHT_GRAY,
-                    constraints: 'wrap'
+                    constraints: 'wrap')
+
 
         }
 

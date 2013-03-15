@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ************************************************************************/
+ *********************************************************************** */
 
 package pdfstamper
 
@@ -28,6 +28,7 @@ import griffon.transform.PropertyListener
 
 @Bindable
 @PropertyListener(enabler)
+//@PropertyListener(sampleFooterGenerator)
 
 
 class PdfstamperModel {
@@ -36,21 +37,28 @@ class PdfstamperModel {
     String sourceDir = ""
     String targetDir = ""
 
-    // configuration settings
-
-    String pagePrefix = "Seite "
-    String filePrefix = "Kapitel "
-
-
-    Boolean addHeader = false
+    // header configuration
     String header = ""
+
+    // footer configuration settings
+    // ************************************************
+
+    String pagePrefix
+    String filePrefix
+
+    String sampleFooter = ""
+
+    def calcFooter = {
+        //println 'called calcFooter with ' + filePrefix + ' ' + pagePrefix
+        sampleFooter =  filePrefix + ' 2, ' + pagePrefix + ' 42'
+    }
 
 
     // processing status
     int totalNrOfPagesSoFar = 0
     int nrOfFilesToStamp = 0
 
-    String footerSample = ""
+    int currentFileNumber = 0
 
     // start of stamping is only allowed, if:
     //   1.) source and target directories have been selected
@@ -60,7 +68,9 @@ class PdfstamperModel {
     boolean startButtonEnabled = false
 
     private enabler = { e ->
-        startButtonEnabled = !isBlank(sourceDir) &&
+        startButtonEnabled =
+            !isBlank(sourceDir) &&
                     !isBlank(targetDir)
     }
+
 }
