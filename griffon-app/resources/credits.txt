@@ -1,0 +1,13 @@
+Idea and implementation by Gernot Starke (@gernotstarke),
+using Groovy and Griffon (http://griffon.codehaus.org)
+as foundation for the user interface.
+
+Contains code and ideas from Griffon SwingPad,
+  written by Andres Almiray (@aalmiray).
+
+Contains code from Groovy's GroovyConsole, written originally by
+  James Strachan
+  Danno Ferrin (@shemnon)
+
+Pdf stamping by iTextPdf library (http://itextpdf.com).
+
