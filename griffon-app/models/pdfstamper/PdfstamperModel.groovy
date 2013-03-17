@@ -17,6 +17,11 @@
  * limitations under the License.
  *********************************************************************** */
 
+/**
+ * @author Gernot Starke
+ *
+ */
+
 package pdfstamper
 
 import griffon.transform.PropertyListener
@@ -28,7 +33,6 @@ import griffon.transform.PropertyListener
 
 @Bindable
 @PropertyListener(enabler)
-//@PropertyListener(sampleFooterGenerator)
 
 
 class PdfstamperModel {
@@ -38,6 +42,7 @@ class PdfstamperModel {
     String targetDir = ""
 
     // header configuration
+    // ************************************************
     String header = ""
 
     // footer configuration settings
@@ -47,31 +52,70 @@ class PdfstamperModel {
     String filePageSeparator
     String filePrefix
 
+    // sample footer - to display in View
+    //*************************************************
     String sampleFooter = ""
 
-    def calcFooter = {
+    // gets called upon PropertyChange
+    def calcSampleFooter = {
         //println 'called calcFooter with ' + filePrefix + ' ' + pagePrefix
         sampleFooter =  filePrefix + ' 2' + filePageSeparator + pagePrefix + ' 42'
     }
 
 
+
     // processing status
+    // ***************************************************
     int totalNrOfPagesSoFar = 0
     int nrOfFilesToStamp = 0
 
     int currentFileNumber = 0
 
-    // start of stamping is only allowed, if:
-    //   1.) source and target directories have been selected
-    //   2.) stamping has not already been performed
-    //   3.) source and target directories are different
-    //   4.) there's at least ONE Pdf file contained in source directory
     boolean startButtonEnabled = false
+
+    boolean stampingCurrentlyPossible = false
 
     private enabler = { e ->
         startButtonEnabled =
             !isBlank(sourceDir) &&
-            !isBlank(targetDir)
+            !isBlank(targetDir) &&
+            stampingCurrentlyPossible
     }
 
+    /**
+     * check wether stamping is currently allowed (use method to en/disable start button)
+     *
+     * start of stamping is only allowed, if:
+     *   1.) source and target directories have been selected
+     *   2.) stamperService is current not running
+     *   3.) source and target directories are different
+     *   4.) there's at least ONE Pdf file contained in source directory
+     * @return true iff stamping is currently allowed
+     */
+
+
+
+
+    /**
+     * create the footer text
+     * examples:
+     *   file prefix = "Chapter", page prefix = "Page", filePageSeparator = " / ", footer = Chapter 2 / Page 42
+     * @return the footer to be stamped on the current page
+    **/
+    public String createFooter() {
+        // avoid NPE, might be redundant checking
+        filePrefix = (filePrefix == null) ? "" : filePrefix
+        pagePrefix = (pagePrefix == null) ? "" : pagePrefix
+        filePageSeparator = (filePageSeparator == null) ? "" : filePageSeparator
+
+        String myFooter = ""
+        String prefix = ""
+
+        if (filePrefix != "") {
+            myFooter = filePrefix + " " + currentFileNumber.toString() + filePageSeparator
+        }
+
+        return myFooter + pagePrefix + " " + totalNrOfPagesSoFar
+
+    }
 }

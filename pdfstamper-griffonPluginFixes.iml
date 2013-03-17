@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="griffon-1.2.0" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="Griffon:lib-fixes (pdfstamper-griffonPluginFixes)">
+        <CLASSES>
+          <root url="jar://$USER_DIR$/.ivy2/cache/org.codehaus.griffon.plugins/griffon-swing-runtime/jars/griffon-swing-runtime-1.2.0.jar!/" />
+          <root url="jar://$USER_DIR$/.ivy2/cache/org.codehaus.griffon.plugins/griffon-swing-compile/jars/griffon-swing-compile-1.2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/swing-1.2.0/docs/griffon-swing-runtime-1.2.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/swing-1.2.0/docs/griffon-swing-runtime-1.2.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
+

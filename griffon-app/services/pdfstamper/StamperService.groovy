@@ -49,7 +49,6 @@ class StamperService {
     public void stampPdfFilesInDirectory(PdfstamperModel myModel) {
         String currentSourceFileName, currentTargetFileName
 
-
         this.model = myModel
 
         // assert we're working on real directories
@@ -58,11 +57,13 @@ class StamperService {
 
         // collect all pdf files
         def filesToProcess = findPdfFilesInDirectory(model.sourceDir).sort()
-
         println "found files: " + filesToProcess
+
+        model.currentFileNumber = 0
 
         // loop over all files fount
         for (currentFile in filesToProcess) {
+            model.currentFileNumber += 1
             currentSourceFileName = model.getSourceDir() + "/" + currentFile
             currentTargetFileName = model.getTargetDir() + "/" + currentFile
 
@@ -81,9 +82,7 @@ class StamperService {
      * Pagenumbers might begin with a number greater than one, as this file might follow
      * another one... with consecutive numbering.
      *
-     * TODO: Add number prefix, so that "Chapter-1, page 15" becomes possible
-     *
-     * Adding text (pagenumbers), aka "stamping" is performed upon a canvas.
+      * Adding text (pagenumbers), aka "stamping" is performed upon a canvas.
      *
      * @param sourceFile is the original pdf, which is not modified.
      * @param prefix is the (optional) prefix string, like "chapter-2" or such...
@@ -132,15 +131,16 @@ class StamperService {
             // we have to extract the canvas, so we can actually perform the stamping
             PdfContentByte canvas = stamper.getOverContent(currentPageInFile);
 
+            // increment total page count
+            model.totalNrOfPagesSoFar += 1
+
             // create the footer we want to stamp, including pagenumber
-            // TODO: replace by method call footerToStampOnPage = String.valueOf( pageNumberOffset + currentPageInFile )
-            footerToStampOnPage = createFooter(currentPageInFile, pageNumberOffset, pageNumberPrefix)
+            //footerToStampOnPage = createFooter(currentPageInFile, pageNumberOffset, pageNumberPrefix)
+            footerToStampOnPage = model.createFooter()
 
             // do it, stamp the text onto the page
             stampSinglePage(canvas, position, Element.ALIGN_CENTER, footerToStampOnPage);
 
-            // this page is finished, increment total page count
-            model.totalNrOfPagesSoFar += 1
         }
 
         // cleanup

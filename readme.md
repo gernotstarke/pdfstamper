@@ -19,6 +19,9 @@
 * all pdf files (should currently) have A4 size and portrait orientation
 * page bottom has enough free space to add pagenumber and prefix
 
+### System requirements
+* You need a Java (6 or later) runtime installed on your machine.
+
 
 ## Limitations
 Currently (in release 0.42), PdfStamper cannot:
