@@ -20,8 +20,27 @@
 * page bottom has enough free space to add pagenumber and prefix
 
 
+## Limitations
+Currently (in release 0.42), PdfStamper cannot:
+
+* combine Pdf's into single file
+* add graphics in header or footer
+* add Pdf security to output files
+* add the total-nr-of-pages 
+
+
+## Bugs, Issues and Requests
+Please use the issue-tracker at bitbucket.
+
+
+## Documentation
+The documentation will grow into an arc42 example - it's currently just a beginning.
+Find the stuff in the /doc diretory (PdfStamper_arc42.md).
+
+
 ## Future Plans
 
+### Software
 * create an index: collect keywords from the pdf files, sort them and create a nicely formated index.
 
 * stamp a header (in addition to the current footer)
@@ -31,7 +50,9 @@
 * preview generated files
 
  
-
+### Documentation
+* Use PdfStamper as an example for arc42.
+ 
  
  
 
