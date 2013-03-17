@@ -2,7 +2,7 @@
 
 ## What PdfStamper does for you
 
-![the problem](./resources/PdfStamper-Overview.png)
+![the problem](./PdfStamper-Overview.png)
 
 * add page numbers to a number of pdf files within (source) directory
 * it numbers consecutively, starting with page 1
