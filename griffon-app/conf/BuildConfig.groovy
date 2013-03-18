@@ -37,7 +37,7 @@ environments {
                 destDir = "${basedir}/staging"
             }
             webstart {
-                codebase = 'CHANGE ME'
+                codebase = 'arc42 PdfStamper'
             }
         }
     }
@@ -99,16 +99,16 @@ signingkey {
 
 griffon {
     doc {
-        logo = '<a href="http://griffon-framework.org" target="_blank"><img alt="The Griffon Framework" src="../img/griffon.png" border="0"/></a>'
+        logo = '<a href="http://arc42.org" target="_blank"><img alt="The arc42 PdfStamper" src="./img/pdfstamper_logo.png" border="0"/></a>'
         sponsorLogo = "<br/>"
-        footer = "<br/><br/>Made with Griffon (1.2.0)"
+        footer = "<br/><br/>arc42 PdfStamper, made with Griffon (1.2.0)"
     }
 }
 
 deploy {
     application {
         title = "${appName} ${appVersion}"
-        vendor = System.properties['user.name']
+        vendor = 'arc42.org (Gernot Starke)' //original: System.properties['user.name']
         homepage = "http://localhost/${appName}"
         description {
             complete = "${appName} ${appVersion}"
@@ -118,32 +118,32 @@ deploy {
         }
         icon {
             'default' {
-                name   = 'griffon-icon-64x64.png'
+                name   = 'pdfstamper_logo_64x64.png'
                 width  = '64'
                 height = '64'
             }
             splash {
-                name   = 'griffon.png'
-                width  = '391'
-                height = '123'
+                name   = 'pdfstamper_splash'
+                width  = '299'
+                height = '299'
             }
             selected {
-                name   = 'griffon-icon-64x64.png'
+                name   = 'pdfstamper_logo_64x64.png'
                 width  = '64'
                 height = '64'
             }
             disabled {
-                name   = 'griffon-icon-64x64.png'
+                name   = 'pdfstamper_logo_64x64.png'
                 width  = '64'
                 height = '64'
             }
             rollover {
-                name   = 'griffon-icon-64x64.png'
+                name   = 'pdfstamper_logo_64x64.png'
                 width  = '64'
                 height = '64'
             }
             shortcut {
-                name   = 'griffon-icon-64x64.png'
+                name   = 'pdfstamper_logo_64x64.png'
                 width  = '64'
                 height = '64'
             }

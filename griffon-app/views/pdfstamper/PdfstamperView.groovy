@@ -123,7 +123,7 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
             label( text: bind( source: model,
                             sourceProperty: 'sampleFooter',
                             sourceEvent: 'propertyChange',
-                            converter: model.calcFooter),
+                            converter: model.calcSampleFooter),
                     foreground: Color.LIGHT_GRAY,
                     constraints: 'wrap')
 
