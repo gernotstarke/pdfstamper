@@ -2,6 +2,7 @@ package pdfstamper
 
 import griffon.test.*
 
+
 class StamperServiceTests extends GriffonUnitTestCase {
 
     PdfstamperModel myModel
@@ -18,6 +19,9 @@ class StamperServiceTests extends GriffonUnitTestCase {
         super.tearDown()
     }
 
+    /**
+     * verify that footers are generated properly
+     */
     void testFooterWithoutFilePrefix() {
         myModel.filePrefix = ""
         myModel.filePageSeparator = ""
