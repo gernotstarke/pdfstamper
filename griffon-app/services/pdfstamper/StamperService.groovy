@@ -51,6 +51,8 @@ class StamperService {
 
         this.model = myModel
 
+        myModel.disallowStamping()  // disable start button
+
         // assert we're working on real directories
         assert new File(model.sourceDir).isDirectory()
         assert new File(model.targetDir).isDirectory()
@@ -74,6 +76,8 @@ class StamperService {
 
             model.totalNrOfPagesSoFar += nrOfPagesInCurrentFile
         }
+
+        model.allowStamping() // enables stamping again
     }
 
     /**

@@ -24,16 +24,13 @@
 
 package pdfstamper
 
-import griffon.transform.PropertyListener
-import groovy.beans.Bindable
-
 import static griffon.util.GriffonNameUtils.isBlank
 import griffon.transform.PropertyListener
 
 
 @Bindable
 @PropertyListener(enabler)
-
+@PropertyListener()
 
 class PdfstamperModel {
 
@@ -73,25 +70,36 @@ class PdfstamperModel {
 
     boolean startButtonEnabled = false
 
-    boolean stampingCurrentlyPossible = false
+    boolean currentlyIdle = true
 
-    private enabler = { e ->
-        startButtonEnabled =
-            !isBlank(sourceDir) &&
-            !isBlank(targetDir) &&
-            stampingCurrentlyPossible
+
+    public void disallowStamping() {
+        currentlyIdle = false
     }
 
-    /**
-     * check wether stamping is currently allowed (use method to en/disable start button)
-     *
-     * start of stamping is only allowed, if:
-     *   1.) source and target directories have been selected
-     *   2.) stamperService is current not running
-     *   3.) source and target directories are different
-     *   4.) there's at least ONE Pdf file contained in source directory
-     * @return true iff stamping is currently allowed
-     */
+    public void allowStamping() {
+        currentlyIdle = true
+    }
+
+    //* check if stamping is currently allowed (use method to en/disable start button)
+     private enabler = { e ->  startButtonEnabled =
+        //  start of stamping is only allowed, if:
+        // 1.) source and target directories have been selected
+         !isBlank(sourceDir) &&
+         !isBlank(targetDir) &&
+
+        // 2.) stamperService is current not running
+        //     -> disableStamping gets called upon entry of service
+
+         currentlyIdle &&
+
+        // 3.) source and target directories are different
+         targetDir != sourceDir  &&
+
+        // 4.) there's at least ONE Pdf file contained in source directory
+         nrOfFilesToStamp > 0
+    }
+
 
 
 
