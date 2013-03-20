@@ -96,34 +96,35 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
             label 'Header: ', constraints: 'left, skip'
             textField(id: 'header', columns: 40,
                     constraints: 'span, growx',
-                    text: bind { model.header })
+                    text: bind(target: model, 'header', value: "")
+            )
 
             label 'File prefix: ', constraints: 'skip'
             textField(columns: 15, id: 'filePrefix', constraints: 'wrap',
-                    text: bind( target:model,
-                                'filePrefix',
-                                value: 'Kapitel')
+                    text: bind(target: model,
+                            'filePrefix',
+                            value: 'Kapitel')
             )
 
             label 'File / Page Separator: ', constraints: 'skip'
             textField(columns: 15, id: 'filePageSeparator', constraints: 'wrap',
-                    text: bind( target:model,
-                                'filePageSeparator',
-                                value: ', ')
+                    text: bind(target: model,
+                            'filePageSeparator',
+                            value: ', ')
             )
 
             label 'Page number prefix: ', constraints: 'skip'
             textField(columns: 15, id: 'pagePrefix', constraints: '',
-                    text: bind( target:model,
-                                'pagePrefix',
-                                value: 'Seite')
+                    text: bind(target: model,
+                            'pagePrefix',
+                            value: 'Seite')
             )
 
             label 'e.g.', foreground: Color.LIGHT_GRAY
-            label( text: bind( source: model,
-                            sourceProperty: 'sampleFooter',
-                            sourceEvent: 'propertyChange',
-                            converter: model.calcSampleFooter),
+            label(text: bind(source: model,
+                    sourceProperty: 'sampleFooter',
+                    sourceEvent: 'propertyChange',
+                    converter: model.calcSampleFooter),
                     foreground: Color.LIGHT_GRAY,
                     constraints: 'wrap')
 

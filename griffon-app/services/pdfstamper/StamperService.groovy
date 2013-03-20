@@ -123,15 +123,17 @@ class StamperService {
 
             // we have to calculate footer positions for every page,
             // as page layout and dimensions might change within a file (although unlikely)
-            Point footerPosition = calculateFooterPosition(currentPageInFile, reader);
+            Point footerPosition = calculateFooterPosition( currentPageInFile, reader )
+            Point headerPosition = calculateHeaderPosition( currentPageInFile, reader )
 
             // create the footer we want to stamp, including pagenumber
             //footerToStampOnPage = createFooter(currentPageInFile, pageNumberOffset, pageNumberPrefix)
             footerToStampOnPage = model.createFooter()
 
-            // do it, stamp the text onto the page
+            // stamp the footer onto the page
             stampSinglePage(canvas, footerPosition, Element.ALIGN_CENTER, footerToStampOnPage);
 
+            stampSinglePage( canvas, headerPosition, Element.ALIGN_CENTER, model.header )
         }
 
         // cleanup
@@ -166,6 +168,21 @@ class StamperService {
     }
 
     /**
+         * calculateHeaderPosition
+         * Determines the Point where the header shall be stamped.
+         * Headers are always stamped centered at the top.
+         *
+         * @param currentPageNumberInFile : what page is currently being processed?
+         * @param reader : the PdfReader which reads our file
+         * @return Point , the location where the header shall be stamped
+         */
+        private Point calculateHeaderPosition(int currentPageNumberInFile, PdfReader reader) {
+            Rectangle rectangle = reader.getPageSize(currentPageNumberInFile);
+            return new Point((int) (rectangle.getRight() / 2), 800);
+        }
+
+
+    /**
      * calculateFooterPosition
      * Determines the Point where the pagenumber shall be stamped.
      * PageNumbers are always stamped centered at the bottom.
@@ -178,22 +195,23 @@ class StamperService {
         Rectangle rectangle = reader.getPageSize(currentPageNumberInFile);
         return new Point((int) (rectangle.getRight() / 2), 15);
     }
+//
+//    /**
+//     *
+//     * @param currentPageNumber what's the current page number in current file
+//     * @param offset
+//     * @param prefix
+//     * @return the text to stamp on the page, in the form "Chapter 1 - page 12" or similar
+//     */
+//    private String createFooter(int currentPageNrInFile, int pageNumberOffset, String prefix) {
+//        // ensure prefix is not null
+//        prefix = prefix != null ? prefix : ""
+//
+//
+//        return prefix + String.valueOf(pageNumberOffset + currentPageNrInFile)
+//
+//    }
 
-    /**
-     *
-     * @param currentPageNumber what's the current page number in current file
-     * @param offset
-     * @param prefix
-     * @return the text to stamp on the page, in the form "Chapter 1 - page 12" or similar
-     */
-    private String createFooter(int currentPageNrInFile, int pageNumberOffset, String prefix) {
-        // ensure prefix is not null
-        prefix = prefix != null ? prefix : ""
-
-
-        return prefix + String.valueOf(pageNumberOffset + currentPageNrInFile)
-
-    }
 
 
     /**
