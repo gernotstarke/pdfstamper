@@ -42,10 +42,13 @@ class PdfstamperController {
         execOutsideUI {
 
             // disable start button, so user cannot confuse us while processing
-            model.startButtonEnabled = false
+            model.disallowStamping()
+
+            // do the work
             stamperService.stampPdfFilesInDirectory(model)
 
             // enable start button again
+            model.allowStamping()
         }
 
     }
