@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ************************************************************************/
+ *********************************************************************** */
 
 /*
  * @author Gernot Starke
@@ -32,16 +32,20 @@ class PdfstamperController {
 
 
     void mvcGroupInit(Map<String, Object> args) {
-        }
+    }
 
-
+    /*
+    * delegate stamping (processing) to stamperService
+    * (which gets injected by Griffon)
+     */
     def startStamping = { evt = null ->
-        println "starting to stamp in controller"
-        // delegate to service
-        // TODO: ensure stamping is performed OUTSIDE of swing event loop!
+        execOutsideUI {
 
-        execOutsideUI{
-            stamperService.stampPdfFilesInDirectory( model )
+            // disable start button, so user cannot confuse us while processing
+            model.startButtonEnabled = false
+            stamperService.stampPdfFilesInDirectory(model)
+
+            // enable start button again
         }
 
     }
@@ -55,7 +59,7 @@ class PdfstamperController {
 
             // update number of Pdf files found in source dir
             model.nrOfFilesToStamp =
-                stamperService.nrOfPdfFilesInDirectory( model.sourceDir )
+                stamperService.nrOfPdfFilesInDirectory(model.sourceDir)
         }
     }
 
@@ -78,7 +82,6 @@ class PdfstamperController {
             c.show()
         }
     }
-
 
 //    def onOSXPrefs = { app ->
 //        withMVCGroup('preferences') { m, v, c ->
