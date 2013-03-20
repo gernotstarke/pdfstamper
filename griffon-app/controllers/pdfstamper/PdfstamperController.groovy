@@ -24,6 +24,8 @@
 package pdfstamper
 
 import javax.swing.JFileChooser
+import org.arc42.util.FileUtil
+
 
 class PdfstamperController {
     def model
@@ -62,7 +64,7 @@ class PdfstamperController {
 
             // update number of Pdf files found in source dir
             model.nrOfFilesToStamp =
-                stamperService.nrOfPdfFilesInDirectory(model.sourceDir)
+                FileUtil.nrOfPdfFilesInDirectory(model.sourceDir)
         }
     }
 

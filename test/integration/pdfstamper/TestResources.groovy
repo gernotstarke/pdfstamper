@@ -1,4 +1,4 @@
-package pdfstamper.test
+package pdfstamper
 
 /**
  * This class contains several constants required for testing
