@@ -16,5 +16,4 @@ class TestResources {
     final static DIR_WITH_TWO_PDFs  = TEST_RESOURCES_DIR + "TwoPdfs/"
     final static DIR_WITH_MANY_PDFs = TEST_RESOURCES_DIR + "ManyPdfs/"
 
-    final static TARGET_DIR = "./targetDir/"
 }

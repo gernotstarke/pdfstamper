@@ -1,0 +1,1 @@
+Please don't modify this directory - it contains Pdf files for unit and integration tests of PdfStamper
