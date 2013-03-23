@@ -109,7 +109,9 @@ deploy {
     application {
         title = "${appName} ${appVersion}"
         vendor = 'arc42.org (Gernot Starke)' //original: System.properties['user.name']
-        homepage = "http://localhost/${appName}"
+        //homepage = "http://localhost/${appName}"
+        homepage = "http://confluence.arc42.org"
+
         description {
             complete = "${appName} ${appVersion}"
             oneline  = "${appName} ${appVersion}"
@@ -123,7 +125,7 @@ deploy {
                 height = '64'
             }
             splash {
-                name   = 'pdfstamper_splash'
+                name   = 'pdfstamper_splash.jpg'
                 width  = '299'
                 height = '299'
             }

@@ -13,3 +13,9 @@ log4j = {
            'griffon.app'
 }
 
+// splash screen configuration
+
+    //splash.image = 'pdfstamper_splash.png'
+    splash.image = 'pdfstamper_splash_small.png'
+
+
