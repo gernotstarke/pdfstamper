@@ -10,7 +10,6 @@
     <content url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/swing-1.2.0" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="griffon-1.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="griffon-1.2.0" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Griffon:lib (pdfstamper-griffonPlugins)">
