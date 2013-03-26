@@ -128,7 +128,17 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
                     foreground: Color.LIGHT_GRAY,
                     constraints: 'wrap')
 
+            checkBox("evenify",
+                    selected: bind(target:model, 'evenify', value:true),
+                    constraints: 'skip'
+            )
+            label('add a blank page so pagecount of file is always even',
+                    foreground: Color.LIGHT_GRAY,
+                    constraints: 'wrap'
+                    )
 
+            // prepare for additional security options
+             // checkBox('disable copy from Pdf', constraints: 'skip, wrap'  )
         }
 
 

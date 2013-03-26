@@ -30,7 +30,6 @@ import griffon.transform.PropertyListener
 
 @Bindable
 @PropertyListener(enabler)
-@PropertyListener()
 
 class PdfstamperModel {
 
@@ -59,6 +58,9 @@ class PdfstamperModel {
         sampleFooter =  filePrefix + ' 2' + filePageSeparator + pagePrefix + ' 42'
     }
 
+    // other configuration options
+    //*************************************************
+    Boolean evenify = true
 
 
     // processing status
