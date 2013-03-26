@@ -33,9 +33,23 @@ Ooops - the following use case diagram looks like a big app - which our little p
 
 Brief description of these use cases:
 
-* TODO
-* TODO
-* TODO...
+##### Add page (and chapter) numbers to Pdf files
+* number the pages consecutively, remember the last pagenumber from the previous file to calculate the first pagenumber of the current file.
+* *evenify* on demand: add a blank page at the end of every file that has an odd number of pages. Reason: Odd numbers shall always be printed on *right* pages, even numbers are always an *left* pages. On double-sided books, even numbers are always on backsides… Without *evenification*, some chapters could start with an even pagenumber.
+* Optionally add the number of the current file in the footer.
+
+ 
+##### Add header to Pdf files
+Same as adding page- and chapter numbers - but stamping a (constant) text in the header.
+
+##### Generate index
+In handouts with more than 100 pages, it get's difficult to find particular topics without an index. We want to support
+
+##### Create course handouts
+* optional: combine several pdf files into ONE.
+* optional: add security, so people cannot (1) open, (2) print or (3) copy from the file. The Pdf file format and most Pdf readers support these security restrictions. Security is based upon passwords.
+* optional: add logo and/or watermarks.
+* 
 
 ### Architecture and Quality Goals
 
