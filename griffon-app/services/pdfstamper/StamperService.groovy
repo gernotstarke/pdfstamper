@@ -66,6 +66,7 @@ class StamperService {
         // **************************
         for (currentFile in filesToProcess) {
             model.currentFileNumber += 1
+
             // file to read from in sourceDir
             currentSourceFileName = FileUtil.fullPathFileName( model.sourceDir, currentFile )
 
@@ -78,12 +79,14 @@ class StamperService {
 
             // evenify: ensure, that every file has an EVEN nr of pages!!
             // if the number of pages is ODD (that is, nr % 2 == 1), increment nrOfPagesInCurrentFile by 1
-            if (nrOfPagesInCurrentFile % 2 == 1) {
-                nrOfPagesInCurrentFile += 1
+            if (model.evenify) {
+                if (nrOfPagesInCurrentFile % 2 == 1) {
+                    model.totalNrOfPagesSoFar += 1
+                    // todo: if configured, add a blank pdf page here
+
+                }
             }
 
-            //
-            model.totalNrOfPagesSoFar += nrOfPagesInCurrentFile
         }
 
     }
@@ -111,14 +114,14 @@ class StamperService {
         String footerToStampOnPage
 
 
-        int nrOfPagesInThisFile = reader.getNumberOfPages()
-
         // make sure source file exists, abort otherwise
         assert new File(sourceFile).exists()
 
         // initialize the pdf reader and stamper
         reader = initPdfReader(sourceFile)
         stamper = initPdfStamper(targetFile, reader)
+        int nrOfPagesInThisFile = reader.getNumberOfPages()
+
 
 
         // loop over all pages in this file
