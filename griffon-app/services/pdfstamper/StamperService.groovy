@@ -36,7 +36,6 @@ import org.arc42.util.FileUtil
 class StamperService {
     private PdfstamperModel model
 
-    private int nrOfPagesInCurrentFile = 0
 
     // this method is called after the model is instantiated
     void serviceInit() {
@@ -49,6 +48,8 @@ class StamperService {
      */
     public void stampPdfFilesInDirectory(PdfstamperModel myModel) {
         String currentSourceFileName, currentTargetFileName
+
+        int nrOfPagesInCurrentFile
 
         this.model = myModel
 
@@ -72,8 +73,16 @@ class StamperService {
             currentTargetFileName = FileUtil.fullPathFileName( model.targetDir, currentFile )
 
             // process the current file
-            stampPagesInFile(currentSourceFileName, currentTargetFileName)
+            nrOfPagesInCurrentFile = stampPagesInFile(currentSourceFileName, currentTargetFileName)
 
+
+            // evenify: ensure, that every file has an EVEN nr of pages!!
+            // if the number of pages is ODD (that is, nr % 2 == 1), increment nrOfPagesInCurrentFile by 1
+            if (nrOfPagesInCurrentFile % 2 == 1) {
+                nrOfPagesInCurrentFile += 1
+            }
+
+            //
             model.totalNrOfPagesSoFar += nrOfPagesInCurrentFile
         }
 
@@ -88,12 +97,12 @@ class StamperService {
       * Adding text (pagenumbers), aka "stamping" is performed upon a canvas.
      *
      * @param sourceFile is the original pdf, which is not modified.
-     * @param prefix is the (optional) prefix string, like "chapter-2" or such...
+     * @param targetFile is the file that will be written to.
      *
      * @author Gernot Starke
      *
      * */
-    private void stampPagesInFile(String sourceFile, String targetFile) {
+    private int stampPagesInFile(String sourceFile, String targetFile) {
         // PDF related stuff
         PdfReader reader;
         PdfStamper stamper;
@@ -102,14 +111,15 @@ class StamperService {
         String footerToStampOnPage
 
 
-         // make sure source file exists, abort otherwise
+        int nrOfPagesInThisFile = reader.getNumberOfPages()
+
+        // make sure source file exists, abort otherwise
         assert new File(sourceFile).exists()
 
         // initialize the pdf reader and stamper
         reader = initPdfReader(sourceFile)
         stamper = initPdfStamper(targetFile, reader)
 
-        int nrOfPagesInThisFile = reader.getNumberOfPages()
 
         // loop over all pages in this file
         for (int currentPageInFile = 1; currentPageInFile <= nrOfPagesInThisFile; currentPageInFile += 1) {
@@ -139,6 +149,8 @@ class StamperService {
         // cleanup
         //reader.close()
         stamper.close()
+
+        return  nrOfPagesInThisFile
 
     }
 
@@ -246,7 +258,6 @@ class StamperService {
         assert reader != null
 
         try {
-            // TODO: make sure the output file does not exist!
             localStamper = new PdfStamper(reader, new FileOutputStream(targetFile))
 
         } catch (DocumentException e) {

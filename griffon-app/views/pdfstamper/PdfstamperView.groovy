@@ -120,7 +120,7 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
                             value: 'Seite')
             )
 
-            label 'e.g.', foreground: Color.LIGHT_GRAY
+            label 'e.g.', foreground: Color.LIGHT_GRAY, constraints: 'split 2'
             label(text: bind(source: model,
                     sourceProperty: 'sampleFooter',
                     sourceEvent: 'propertyChange',
@@ -128,9 +128,9 @@ mainFrame = application(title: 'Pdf Stamper - arc42.org',
                     foreground: Color.LIGHT_GRAY,
                     constraints: 'wrap')
 
-            checkBox("evenify",
-                    selected: bind(target:model, 'evenify', value:true),
-                    constraints: 'skip'
+            label 'Evenify:', constraints: 'skip'
+            checkBox( selected: bind(target:model, 'evenify', value:true),
+                    constraints: 'left'
             )
             label('add a blank page so pagecount of file is always even',
                     foreground: Color.LIGHT_GRAY,

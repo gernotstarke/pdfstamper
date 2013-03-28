@@ -60,7 +60,7 @@ class PdfstamperModel {
 
     // other configuration options
     //*************************************************
-    Boolean evenify = true
+    Boolean evenify = true    // ensure that every file has EVEN number of pages
 
 
     // processing status
@@ -119,7 +119,6 @@ class PdfstamperModel {
         filePageSeparator = (filePageSeparator == null) ? "" : filePageSeparator
 
         String myFooter = ""
-        String prefix = ""
 
         if (filePrefix != "") {
             myFooter = filePrefix + " " + currentFileNumber.toString() + filePageSeparator
