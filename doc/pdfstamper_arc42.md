@@ -149,9 +149,21 @@ Calculating the size of a page we use an instance of iText.PdfReader as follows:
 ### Acceptance Testing
 The app was developed in _acceptance test driven development_ (ATDD) style: Before I wrote productive code, I formulated the appropriate acceptance test as [Spock Specification][url_spock].
 
+#### Preconditions for Testing
+(aka infrastructure for testing)
 
-#### acceptance test infrastructure
-* fixed test directory
+A number of sample pdf files have to exist at specific locations. These are defined in the TestResources class:
+
+    final static TEST_RESOURCES_DIR = "./test/resources/"
+    final static EMPTY_DIR          = TEST_RESOURCES_DIR + "EmptyDir/"
+    final static DIR_WITH_ONE_PDF   = TEST_RESOURCES_DIR + "OnePdf/"
+    final static DIR_WITH_HUGE_PDF  = TEST_RESOURCES_DIR + "colored_XL_Pdf/"
+    final static DIR_WITH_TWO_PDFs  = TEST_RESOURCES_DIR + "TwoPdfs/"
+    final static DIR_WITH_MANY_PDFs = TEST_RESOURCES_DIR + "ManyPdfs/"
+
+
+#### Major Test Case: Stamping the Correct Number of Pages
+<tbd>
 
  
 ---
