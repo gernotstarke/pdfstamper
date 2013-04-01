@@ -24,12 +24,12 @@
 
 
 ## Limitations
-Currently (in release 0.42), PdfStamper cannot:
+Currently PdfStamper cannot:
 
 * combine Pdf's into single file
 * add graphics in header or footer
 * add Pdf security to output files
-* add the total-nr-of-pages 
+* add the total-nr-of-pages to header or footer
 
 
 ## Bugs, Issues and Requests
