@@ -2,7 +2,7 @@
 
 ## What PdfStamper does for you
 
-![the problem](./PdfStamper-Overview.png)
+![PdfStamper-Overview][1]
 
 * add page numbers to a number of pdf files within (source) directory
 * it numbers consecutively, starting with page 1
@@ -56,7 +56,8 @@ Find the stuff in the /doc diretory (PdfStamper_arc42.md).
 ### Documentation
 * Use PdfStamper as an example for arc42.
  
+---
  
- 
+[1]: http://bitbucket.org/arc42/pdfstamper/downloads/PdfStamper-Overview.png
 
 
