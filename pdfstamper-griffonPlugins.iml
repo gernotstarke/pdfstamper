@@ -2,25 +2,28 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/installer-0.8" />
-    <content url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/jide-builder-1.0.0" />
-    <content url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/miglayout-1.0.0" />
-    <content url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/splash-1.0.0" />
-    <content url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/spock-0.7" />
-    <content url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/swing-1.2.0" />
-    <orderEntry type="inheritedJdk" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/balloontip-1.0.0" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/installer-0.8" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/jide-builder-1.0.0" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/miglayout-1.0.0" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/sonar-1.0.0" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/splash-1.0.0" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/spock-0.7" />
+    <content url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/swing-1.4.0" />
+    <orderEntry type="jdk" jdkName="1.7.40" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="griffon-1.2.0" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="griffon-1.4.0" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="griffon-1.4.0" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Griffon:lib (pdfstamper-griffonPlugins)">
         <CLASSES>
-          <root url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/jide-builder-1.0.0/lib" />
-          <root url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/installer-0.8/lib" />
+          <root url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/installer-0.8/lib" />
+          <root url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/jide-builder-1.0.0/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/installer-0.8/lib" recursive="false" />
-        <jarDirectory url="file://$USER_DIR$/.griffon/1.2.0/projects/pdfstamper/plugins/jide-builder-1.0.0/lib" recursive="false" />
+        <jarDirectory url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/installer-0.8/lib" recursive="false" />
+        <jarDirectory url="file://$USER_DIR$/.griffon/1.4.0/projects/pdfstamper/plugins/jide-builder-1.0.0/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>

@@ -7,8 +7,8 @@ environments {
                 // keystore = "${basedir}/griffon-app/conf/keys/devKeystore"
                 // alias = 'development'
                 storepass = 'BadStorePassword'
-                keypass   = 'BadKeyPassword'
-                lazy      = true // only sign when unsigned
+                keypass = 'BadKeyPassword'
+                lazy = true // only sign when unsigned
             }
         }
     }
@@ -93,7 +93,7 @@ signingkey {
         alias = env
         // storepass = 'BadStorePassword'
         // keypass   = 'BadKeyPassword'
-        lazy      = true // only sign when unsigned
+        lazy = true // only sign when unsigned
     }
 }
 
@@ -114,39 +114,39 @@ deploy {
 
         description {
             complete = "${appName} ${appVersion}"
-            oneline  = "${appName} ${appVersion}"
-            minimal  = "${appName} ${appVersion}"
-            tooltip  = "${appName} ${appVersion}"
+            oneline = "${appName} ${appVersion}"
+            minimal = "${appName} ${appVersion}"
+            tooltip = "${appName} ${appVersion}"
         }
         icon {
             'default' {
-                name   = 'pdfstamper_logo_64x64.png'
-                width  = '64'
+                name = 'pdfstamper_logo_64x64.png'
+                width = '64'
                 height = '64'
             }
             splash {
-                name   = 'pdfstamper_splash.jpg'
-                width  = '299'
+                name = 'pdfstamper_splash.jpg'
+                width = '299'
                 height = '299'
             }
             selected {
-                name   = 'pdfstamper_logo_64x64.png'
-                width  = '64'
+                name = 'pdfstamper_logo_64x64.png'
+                width = '64'
                 height = '64'
             }
             disabled {
-                name   = 'pdfstamper_logo_64x64.png'
-                width  = '64'
+                name = 'pdfstamper_logo_64x64.png'
+                width = '64'
                 height = '64'
             }
             rollover {
-                name   = 'pdfstamper_logo_64x64.png'
-                width  = '64'
+                name = 'pdfstamper_logo_64x64.png'
+                width = '64'
                 height = '64'
             }
             shortcut {
-                name   = 'pdfstamper_logo_64x64.png'
-                width  = '64'
+                name = 'pdfstamper_logo_64x64.png'
+                width = '64'
                 height = '64'
             }
         }
@@ -160,11 +160,12 @@ griffon.project.dependency.resolution = {
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         griffonHome()
+        jcenter()
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
-        //mavenCentral()
+        mavenCentral()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -172,6 +173,8 @@ griffon.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime' or 'test' scopes eg.
+
+        build 'org.postgresql:postgresql:9.3-1100-jdbc41'
 
         // runtime 'mysql:mysql-connector-java:5.1.5'
     }
@@ -185,12 +188,24 @@ log4j = {
     }
 
     error 'org.codehaus.griffon',
-          'org.springframework',
-          'org.apache.karaf',
-          'groovyx.net'
-    warn  'griffon'
+            'org.springframework',
+            'org.apache.karaf',
+            'groovyx.net'
+    warn 'griffon'
 }
 
 
 app.fileType = '.groovy'
 app.defaultPackageName = 'pdfstamper'
+
+//sonar = {
+//    host { url "http://localhost:9000" }
+//    jdbc { url  "jdbc:postgresql://localhost/sonar"}
+//}
+
+sonar.host.url="http://localhost:9000"
+sonar.jdbc.url="jdbc:postgresql://localhost/sonar"
+sonar.jdbc.driverClassName = 'org.postgresql.Driver'
+sonar.jdbc.username = "sonar"
+sonar.jdbc.password="sonar"
+

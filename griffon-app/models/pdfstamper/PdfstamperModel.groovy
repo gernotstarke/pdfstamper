@@ -24,12 +24,15 @@
 
 package pdfstamper
 
+import java.awt.Color
+
 import static griffon.util.GriffonNameUtils.isBlank
 import griffon.transform.PropertyListener
 
 
 @Bindable
-@PropertyListener(enabler)
+@PropertyListener(startButtonEnabler)
+@PropertyListener(pageAndFileSeparatorEnabler)
 
 class PdfstamperModel {
 
@@ -44,23 +47,32 @@ class PdfstamperModel {
     // footer configuration settings
     // ************************************************
 
-    String pagePrefix
-    String filePageSeparator
-    String filePrefix
+    String pagePrefix = "Seite"
+    String filePageSeparator = ", "
+    String filePrefix = "Kapitel"
+
 
     // sample footer - to display in View
     //*************************************************
     String sampleFooter = ""
 
     // gets called upon PropertyChange
+    // TODO: remove, better put example in toolTip
     def calcSampleFooter = {
         //println 'called calcFooter with ' + filePrefix + ' ' + pagePrefix
         sampleFooter =  filePrefix + ' 2' + filePageSeparator + pagePrefix + ' 42'
     }
 
+
+
     // other configuration options
     //*************************************************
     Boolean evenify = true    // ensure that every file has EVEN number of pages
+
+
+    String pageNumberHorizontalPosition
+
+    Boolean footerIsCentered = false
 
 
     // processing status
@@ -70,10 +82,16 @@ class PdfstamperModel {
 
     int currentFileNumber = 0
 
+
+    // statusBar
+    // ***************************************************
+
+    String status = "Welcome to PdfStamper - built on Groovy and Griffon by arc42 "
+    Color statusColor = PdfStamperUIConstants.TITLECOLOR
+
     boolean startButtonEnabled = false
 
     boolean currentlyIdle = true
-
 
     public void disallowStamping() {
         currentlyIdle = false
@@ -83,8 +101,15 @@ class PdfstamperModel {
         currentlyIdle = true
     }
 
+    // check if we need a page/file separator
+    private pageAndFileSeparatorEnabler = {
+        e -> footerIsCentered = (pageNumberHorizontalPosition == HorizontalPositions.positions[HorizontalPositions.CENTER])
+    }
+
+
+
     //* check if stamping is currently allowed (use method to en/disable start button)
-     private enabler = { e ->  startButtonEnabled =
+     private startButtonEnabler = { e ->  startButtonEnabled =
         //  start of stamping is only allowed, if:
         // 1.) source and target directories have been selected
          !isBlank(sourceDir) &&

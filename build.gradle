@@ -14,7 +14,7 @@ buildscript {
     }
 }
 
-ext.griffonVersion = '1.2.0'
+ext.griffonVersion = '1.4.0'
 version = '0.9b'
 
 apply plugin: 'griffon'

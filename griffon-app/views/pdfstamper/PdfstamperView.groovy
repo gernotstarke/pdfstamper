@@ -19,13 +19,7 @@
 
 package pdfstamper
 
-import javax.swing.BoxLayout
-import javax.swing.JFileChooser
-import java.awt.BorderLayout
-import java.awt.Color
-import java.awt.Desktop
-import java.awt.Dimension
-
+import javax.swing.*
 
 srcDirChooserWindow = fileChooser(
         fileSelectionMode: JFileChooser.DIRECTORIES_ONLY,
@@ -36,144 +30,36 @@ targetDirChooserWindow = fileChooser(
         dialogTitle: "please choose target directory")
 
 
-mainFrame = application(title: 'Pdf Stamper - arc42.org',
+mainFrame = application( //
+        title: 'Pdf Stamper - arc42.org',
         pack: true,
         resizable: false,
         locationByPlatform: true,
         iconImage: imageIcon('/pdfstamper-logo.png').image,
         iconImages: [imageIcon('/pdfstamper-logo-90px.png').image]) {
 
-    panel(border: emptyBorder(6)) {
+
+    panel(border: emptyBorder(4),
+            background: PdfStamperUIConstants.BACKGROUND) {
         migLayout(layoutConstraints: 'fill')
 
-        bannerPanel(constraints: 'span 2, grow, wrap',
-                title: 'Pdf Stamper',
-                subtitle: 'add pagenumbers and headers to your pdf files...',
-                titleIcon: imageIcon('/pdfstamper-logo-90px.png'),
-                subTitleColor: Color.WHITE,
-                background: new Color(0, 0, 0, 1),
-                startColor: Color.LIGHT_GRAY,
-                endColor: Color.BLUE,
-                vertical: true
-        )
+        // header panel
+        widget(build(MainViewHeaderPanel), constraints: 'span 2, grow, wrap')
 
-        panel(border: lineBorder(color: Color.BLUE, thickness: 1), constraints: 'grow, left, wrap, span 2') {
-            migLayout()
+        // directory selection panel
+        widget(build(MainViewDirectorySelectionPanel), constraints: 'grow, wrap, span 2')
 
-            label('Directories', constraints: "wrap", foreground: Color.BLUE)
+        // configuration panel
+        widget(build(MainViewConfigurationPanel), constraints: 'grow, span 2,wrap')
 
-            button('Source Directory', constraints: 'skip',
-                    actionPerformed: controller.selectSrcDir)
-            textField(columns: 40, id: 'sourceDir',
-                    text: bind('sourceDir',
-                            target: model,
-                            id: 'sourceDir')
-            )
-
-            label(id: 'nrOfPdfFilesFound',
-                    foreground: Color.LIGHT_GRAY,
-                    text: bind { model.nrOfFilesToStamp }
-            )
-            label(' Pdf files', foreground: Color.LIGHT_GRAY, constraints: 'wrap')
+        // stamping (= processing) panel
+        widget(build(MainViewStampingPanel), constraints: 'grow, span 4, wrap')
 
 
-            button('Target Directory', constraints: 'skip',
-                    actionPerformed: controller.selectTargetDir)
-            textField(columns: 40, constraints: 'wrap',
-                    id: "targetDir",
-                    text: bind('targetDir',
-                            target: model,
-                            id: 'targetDir')
-            )
-        }
+        // status line
+        // TODO: status bar too big!
+        widget(build(MainViewStatusBar), constraints: 'south, grow')
 
-
-        panel(border: lineBorder(color: Color.BLUE, thickness: 1), constraints: 'grow, span 2,wrap') {
-            migLayout()
-
-            label 'Configuration:', constraints: "wrap", foreground: Color.BLUE
-
-            label 'Header: ', constraints: 'left, skip'
-            textField(id: 'header', columns: 40,
-                    constraints: 'span, growx',
-                    text: bind(target: model, 'header', value: "")
-            )
-
-            label 'File prefix: ', constraints: 'skip'
-            textField(columns: 15, id: 'filePrefix', constraints: 'wrap',
-                    text: bind(target: model,
-                            'filePrefix',
-                            value: 'Kapitel')
-            )
-
-            label 'File / Page Separator: ', constraints: 'skip'
-            textField(columns: 15, id: 'filePageSeparator', constraints: 'wrap',
-                    text: bind(target: model,
-                            'filePageSeparator',
-                            value: ', ')
-            )
-
-            label 'Page number prefix: ', constraints: 'skip'
-            textField(columns: 15, id: 'pagePrefix', constraints: '',
-                    text: bind(target: model,
-                            'pagePrefix',
-                            value: 'Seite')
-            )
-
-            label 'e.g.', foreground: Color.LIGHT_GRAY, constraints: 'split 2'
-            label(text: bind(source: model,
-                    sourceProperty: 'sampleFooter',
-                    sourceEvent: 'propertyChange',
-                    converter: model.calcSampleFooter),
-                    foreground: Color.LIGHT_GRAY,
-                    constraints: 'wrap')
-
-            label 'Evenify:', constraints: 'skip'
-            checkBox( selected: bind(target:model, 'evenify', value:true),
-                    constraints: 'left'
-            )
-            label('add a blank page so pagecount of file is always even',
-                    foreground: Color.LIGHT_GRAY,
-                    constraints: 'wrap'
-                    )
-
-            // prepare for additional security options
-             // checkBox('disable copy from Pdf', constraints: 'skip, wrap'  )
-        }
-
-
-        panel(border: lineBorder(color: Color.BLUE, thickness: 1), constraints: 'grow, wrap') {
-            migLayout(constraints: '')
-            label 'Stamping:', constraints: "left, wrap", foreground: Color.BLUE
-
-            button('Start!', constraints: 'skip, spanx 2',
-                    actionPerformed: controller.startStamping,
-                    enabled: bind { model.startButtonEnabled }
-            )
-            label(text: bind { model.totalNrOfPagesSoFar }, id: 'NrOfPagesProcessed',
-                    foreground: Color.LIGHT_GRAY, constraints: '')
-            label(' pages already processed', foreground: Color.LIGHT_GRAY, constraints: '')
-
-        }
-
-        button('Cancel', constraints: 'right, wrap',
-                actionPerformed: controller.quit
-        )
-
-        jideButton(label: "free and open source: arc42.org",
-                foreground: Color.BLUE, constraints: 'right',
-                actionPerformed: {
-                    if (Desktop.isDesktopSupported()) {
-                        Desktop desktop = Desktop.getDesktop();
-                        try {
-                            desktop.browse(new URI('http://www.arc42.org'))
-                        }
-                        catch (Exception ex) {
-                        }
-                    }
-
-                }
-        )
     }
 
 }

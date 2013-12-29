@@ -62,6 +62,9 @@ class StamperService {
 
         model.currentFileNumber = 0
 
+        // start counting pages at zero
+        model.totalNrOfPagesSoFar = 0
+
         // loop over all files found
         // **************************
         for (currentFile in filesToProcess) {
