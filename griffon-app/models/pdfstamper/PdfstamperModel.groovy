@@ -24,17 +24,23 @@
 
 package pdfstamper
 
-import java.awt.Color
-
-import static griffon.util.GriffonNameUtils.isBlank
 import griffon.transform.PropertyListener
 
+import java.awt.*
+
+import static griffon.util.GriffonNameUtils.isBlank
+
+import pdfstamper.HorizontalPositions as HPOS
 
 @Bindable
 @PropertyListener(startButtonEnabler)
 @PropertyListener(pageAndFileSeparatorEnabler)
 
-class PdfstamperModel {
+public class PdfstamperModel {
+
+    // configuration items - will be passed to stamping-service
+    // after user has choosen required options
+    StamperConfiguration config
 
 
     String sourceDir = ""
@@ -52,46 +58,46 @@ class PdfstamperModel {
     String filePrefix = "Kapitel"
 
 
-    // sample footer - to display in View
-    //*************************************************
-    String sampleFooter = ""
-
-    // gets called upon PropertyChange
-    // TODO: remove, better put example in toolTip
-    def calcSampleFooter = {
-        //println 'called calcFooter with ' + filePrefix + ' ' + pagePrefix
-        sampleFooter =  filePrefix + ' 2' + filePageSeparator + pagePrefix + ' 42'
-    }
-
-
-
     // other configuration options
     //*************************************************
     Boolean evenify = true    // ensure that every file has EVEN number of pages
 
+    // either CENTER, OUTSIDE or INSIDE
+    String pageNumberHorizontalPosition = HPOS.positions[HPOS.OUTSIDE]
 
-    String pageNumberHorizontalPosition
 
     Boolean footerIsCentered = false
 
 
-    // processing status
-    // ***************************************************
-    int totalNrOfPagesSoFar = 0
-    int nrOfFilesToStamp = 0
 
-    int currentFileNumber = 0
-
-
-    // statusBar
+    // status and statusBar
     // ***************************************************
 
     String status = "Welcome to PdfStamper - built on Groovy and Griffon by arc42 "
     Color statusColor = PdfStamperUIConstants.TITLECOLOR
 
+    int nrOfFilesToStamp
+
     boolean startButtonEnabled = false
 
     boolean currentlyIdle = true
+
+
+    /**
+     * getStamperConfiguration
+     */
+    public StamperConfiguration getStamperConfiguration() {
+        return new StamperConfiguration( sourceDir: sourceDir,
+                targetDir: targetDir,
+                header: header,
+                filePrefix: filePrefix,
+                pagePrefix: pagePrefix,
+                filePageSeparator: filePageSeparator,
+                pageNumberHorizontalPosition: pageNumberHorizontalPosition,
+                evenify: evenify)
+
+    }
+
 
     public void disallowStamping() {
         currentlyIdle = false
@@ -103,53 +109,48 @@ class PdfstamperModel {
 
     // check if we need a page/file separator
     private pageAndFileSeparatorEnabler = {
-        e -> footerIsCentered = (pageNumberHorizontalPosition == HorizontalPositions.positions[HorizontalPositions.CENTER])
+        e -> footerIsCentered = (pageNumberHorizontalPosition == HPOS.positions[HPOS.CENTER])
+    }
+
+    // check if stamping is currently allowed
+    // (use method to en/disable start button)
+    private startButtonEnabler = { e ->
+        startButtonEnabled =
+                //  start of stamping is only allowed, if:
+                // 1.) source and target directories have been selected
+                directoryHasBeenSelected( sourceDir) &&
+                directoryHasBeenSelected( targetDir) &&
+
+                // 2.) stamperService is current not running
+                //     -> disableStamping gets called upon entry of service
+                currentlyIdle &&
+
+                // 3.) source and target directories are different
+                targetDir != sourceDir &&
+
+                // 4.) there's at least ONE Pdf file contained in source directory
+                nrOfFilesToStamp > 0
+    }
+
+    private boolean directoryHasBeenSelected( String directory) {
+        return !isBlank( directory )
     }
 
 
-
-    //* check if stamping is currently allowed (use method to en/disable start button)
-     private startButtonEnabler = { e ->  startButtonEnabled =
-        //  start of stamping is only allowed, if:
-        // 1.) source and target directories have been selected
-         !isBlank(sourceDir) &&
-         !isBlank(targetDir) &&
-
-        // 2.) stamperService is current not running
-        //     -> disableStamping gets called upon entry of service
-
-         currentlyIdle &&
-
-        // 3.) source and target directories are different
-         targetDir != sourceDir  &&
-
-        // 4.) there's at least ONE Pdf file contained in source directory
-         nrOfFilesToStamp > 0
+    public String getFilePrefix() {
+        return (filePrefix == null) ? "" : filePrefix
     }
 
 
-
-
-
-    /**
-     * create the footer text
-     * examples:
-     *   file prefix = "Chapter", page prefix = "Page", filePageSeparator = " / ", footer = Chapter 2 / Page 42
-     * @return the footer to be stamped on the current page
-    **/
-    public String createFooter() {
-        // avoid NPE, might be redundant checking
-        filePrefix = (filePrefix == null) ? "" : filePrefix
-        pagePrefix = (pagePrefix == null) ? "" : pagePrefix
-        filePageSeparator = (filePageSeparator == null) ? "" : filePageSeparator
-
-        String myFooter = ""
-
-        if (filePrefix != "") {
-            myFooter = filePrefix + " " + currentFileNumber.toString() + filePageSeparator
-        }
-
-        return myFooter + pagePrefix + " " + totalNrOfPagesSoFar
-
+    public String getPagePrefix() {
+        return (pagePrefix == null) ? "" : pagePrefix
     }
+
+
+    public String getFilePageSeparator() {
+        return (filePageSeparator == null) ? "" : filePageSeparator
+    }
+
 }
+
+

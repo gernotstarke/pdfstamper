@@ -15,14 +15,24 @@ final String PAGE_NR_POSITION_TOOLTIP =
         Determines the horizontal position of the pagenumber<br>
         with its prefix:<br><ul>
              <li>inside: odd pages: left, even pages: right</li>
-             <li>centered: file and page will be concatenated.</li>
-             <li>outside (standard for books): odd pages: right, even pages: left</li>
+             <li>center: file and page will be concatenated and horizontally centered..</li>
+             <li>outside (<strong>standard for books</strong>):<br> odd pages: right, even pages: left</li>
         </ul>
+        </html>"""
+
+final String FILE_PAGE_SEPARATOR_TOOLTIP =
+        """<html>
+        Character(s) to be stamped between "page prefix" and "page number",<br>
+        e.g. "<strong>,</strong> "
         </html>"""
 
 final String EVENIFY_TOOLTIP =
         """<html>
-        Add a blank page, if neccessary, so pagecount of file becomes even.
+        Add a blank page, if neccessary,<br>
+        so pagecount of file becomes even.<br>
+        <br>
+        Important if you concatenate the resulting files.
+
         </html>"""
 
 final String HEADER_TOOLTIP =
@@ -88,7 +98,7 @@ configurationPanel =
                             style: PdfStamperUIConstants.GREEN_TIP)
 
 
-                    // Page number
+                    // Page number prefix (e.g. "Seite"
                     // ===================================================
 
                     label 'Page number prefix: ',
@@ -98,7 +108,7 @@ configurationPanel =
 
                     textField(columns: 15,
                             id: 'pagePrefix',
-                            constraints: '',
+                            constraints: 'wrap',
                             text: bind(target: model, 'pagePrefix', value: 'Seite'),
                             mouseEntered: { pagePrefixBaloon.visible = true },
                             mouseExited: { pagePrefixBaloon.visible = false }
@@ -112,6 +122,8 @@ configurationPanel =
                             style: PdfStamperUIConstants.GREEN_TIP)
 
 
+                    // Page number position
+                    // ===================================================
 
                     label 'Page number position:',
                             constraints: 'skip',
@@ -121,11 +133,10 @@ configurationPanel =
 
                     comboBox(items: HorizontalPositions.positions,
                             id:'pageNrPosition',
-                            selectedIndex: 2, // == "outside"
+                            selectedIndex: HorizontalPositions.OUTSIDE,
                             selectedItem: bind(
                                             target: model,
                                             targetProperty: 'pageNumberHorizontalPosition'),
-                            //items: ['inside', 'center', 'outside'],
                             constraints: 'wrap',
                             mouseEntered: {pageNrPositionBaloon.visible = true},
                             mouseExited: {pageNrPositionBaloon.visible = false})
@@ -137,30 +148,45 @@ configurationPanel =
                             style: PdfStamperUIConstants.GREEN_TIP)
 
 
+                    // File / Page separator
+                    // ===================================================
 
                     label('File / Page Separator: ',
                             constraints: 'skip',
-                            visible:  bind { model.footerIsCentered })
+                            visible:  bind { model.footerIsCentered },
+                            mouseEntered: { filePageSeparatorBaloon.visible = true },
+                            mouseExited: { filePageSeparatorBaloon.visible = false }
+                    )
 
                     textField(id: 'filePageSeparator',
-                            columns: 15,
-                            constraints: 'wrap',
+                            columns: 4,
+                            constraints: '',
                             text: bind(target: model, 'filePageSeparator', value: ', '),
-                            visible: bind { model.footerIsCentered}
+                            visible: bind { model.footerIsCentered},
+                            mouseEntered: { filePageSeparatorBaloon.visible = true },
+                            mouseExited: { filePageSeparatorBaloon.visible = false }
                     )
 
 
                     label('e.g.',
                             foreground: Color.LIGHT_GRAY,
-                            constraints: 'span 2')
+                            constraints: 'skip',
+                            visible: bind { model.footerIsCentered })
 
-                    label(text: bind(source: model,
+                   /* label(text: bind(source: model,
                                     sourceProperty: 'sampleFooter',
                                     sourceEvent: 'propertyChange',
-                                    converter: model.calcSampleFooter
-                    ),
+                                    converter: model.calcSampleFooter),
                             foreground: Color.LIGHT_GRAY,
-                            constraints: 'wrap')
+                            constraints: 'wrap',
+                            visible: bind { model.footerIsCentered }
+                    )*/
+
+                    balloonTip(filePageSeparator,
+                            id: "filePageSeparatorBaloon",
+                            text: FILE_PAGE_SEPARATOR_TOOLTIP,
+                            hideAfter: 5000,
+                            useCloseButton: false )
 
 
 

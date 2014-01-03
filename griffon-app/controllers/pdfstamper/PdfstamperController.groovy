@@ -46,8 +46,9 @@ class PdfstamperController {
             // disable start button, so user cannot confuse us while processing
             model.disallowStamping()
 
+
             // do the work
-            stamperService.stampPdfFilesInDirectory(model)
+            stamperService.prepareAndProcessAllFiles( model.getStamperConfiguration() )
 
             // enable start button again
             model.allowStamping()

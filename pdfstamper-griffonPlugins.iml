@@ -14,6 +14,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="griffon-1.4.0" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="griffon-1.4.0" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="spock-core-0.7-groovy-2.0-20120930.020057-22" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Griffon:lib (pdfstamper-griffonPlugins)">
         <CLASSES>

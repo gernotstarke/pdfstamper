@@ -31,7 +31,7 @@ class StamperServiceSpec extends Specification {
             myModel.sourceDir = TestResources.DIR_WITH_ONE_PDF
 
         when: "we stamp the one-page file"
-            myService.stampPdfFilesInDirectory( myModel )
+            myService.prepareAndProcessAllFiles( myModel )
 
 
         then: "the pagecount shall be one"
@@ -46,7 +46,7 @@ class StamperServiceSpec extends Specification {
             myModel.evenify   = evenify
 
         when: "we stamp the files in directory"
-            myService.stampPdfFilesInDirectory( myModel )
+            myService.prepareAndProcessAllFiles( myModel )
 
         then:
             myModel.totalNrOfPagesSoFar == nrOfPages
