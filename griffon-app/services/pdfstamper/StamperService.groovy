@@ -47,7 +47,7 @@ class StamperService {
      * @param pdfStamperModel : the fully configured model, containing all configuration items
      *
      */
-    public void prepareAndProcessAllFiles(StamperConfiguration configuration) {
+    public ProcessingState prepareAndProcessAllFiles(StamperConfiguration configuration) {
 
         this.config = configuration
 
@@ -67,7 +67,11 @@ class StamperService {
         // iterate over all pdf files
         processAllPdfFiles( pdfFilesToProcess )
 
+        return processingState
     }
+
+
+
 
     /*
      * chose the implementation of @see SingleFileStamper for footer processing.
@@ -122,19 +126,7 @@ class StamperService {
                                          processingState)
 
 
-            // TODO evenify: ensure, that every file has an EVEN nr of pages!!
-            // if the number of pages is ODD (that is, nr % 2 == 1), increment nrOfPagesInCurrentFile by 1
-            /*if (model.evenify) {
-                if (nrOfPagesInCurrentFile % 2 == 1) {
-                    model.totalNrOfPagesSoFar += 1
-                    // todo: if configured, add a blank pdf page here
-
-                }
-            }*/
-
         }
     }
-
-
 
 }

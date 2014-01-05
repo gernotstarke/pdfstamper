@@ -32,6 +32,8 @@ class PdfstamperController {
     def view
     def stamperService
 
+    ProcessingState processingState
+
 
     void mvcGroupInit(Map<String, Object> args) {
     }
@@ -48,11 +50,20 @@ class PdfstamperController {
 
 
             // do the work
-            stamperService.prepareAndProcessAllFiles( model.getStamperConfiguration() )
+            processingState =  stamperService.prepareAndProcessAllFiles( model.getStamperConfiguration() )
+
 
             // enable start button again
             model.allowStamping()
         }
+
+        // some statistics...
+        processingState.stopTimer()
+
+
+       // update statusBar
+        model.status = processingState.summarizeProcessingResults()
+        model.statusColor =   PdfStamperUIConstants.NICE_GREEN
 
     }
 
@@ -66,6 +77,10 @@ class PdfstamperController {
             // update number of Pdf files found in source dir
             model.nrOfFilesToStamp =
                 FileUtil.nrOfPdfFilesInDirectory(model.sourceDir)
+
+
+            model.status = "source directory selected with " + model.nrOfFilesToStamp + " pdf files"
+            model.statusColor =PdfStamperUIConstants.NICE_GREEN
         }
     }
 
@@ -88,12 +103,6 @@ class PdfstamperController {
             c.show()
         }
     }
-
-//    def onOSXPrefs = { app ->
-//        withMVCGroup('preferences') { m, v, c ->
-//            c.show()
-//        }
-//    }
 
 
     def quit = {

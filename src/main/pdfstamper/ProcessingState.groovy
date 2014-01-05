@@ -26,6 +26,10 @@ class ProcessingState {
 
     int totalNumberOfPagesSoFar
 
+    long startTime
+
+    long processingTimeMillis = 0
+
 
     /**
      * initialize instance
@@ -41,14 +45,43 @@ class ProcessingState {
     public void resetProcessingState() {
         currentFileNumber = 0
         totalNumberOfPagesSoFar = 0
+
+        startTime = System.currentTimeMillis()
+        processingTimeMillis = 0
     }
 
+    /**
+     * calculate the milliseconds between start and stop...
+     */
+    public void stopTimer() {
+        processingTimeMillis = System.currentTimeMillis() - startTime
+    }
+
+    /**
+     * increment the pagecount
+     */
     public void incrementTotalPageCount() {
         totalNumberOfPagesSoFar += 1
     }
 
     public void incrementCurrentFileNumber() {
         currentFileNumber += 1
+    }
+
+    public String getElapsedTime() {
+        return processingTimeMillis.toString()
+    }
+
+
+    /**
+     * generate some statistics from processingState
+     */
+    public String summarizeProcessingResults() {
+        String processedPages = totalNumberOfPagesSoFar + " pages "
+        String processedFiles = "in " + currentFileNumber + " files processed in "
+        String milliseconds =  getElapsedTime() + "msec"
+
+        return processedPages + processedFiles + milliseconds
     }
 
 }

@@ -40,7 +40,6 @@ class PartitionedFooterStamper extends SingleFileStamper {
 
     @Override
     void stampFooter(PdfContentByte canvas, Rectangle pageSize) {
-        println "partitioned footer: stamp footer"
 
         // the easy part:
         stampFileInfo(canvas, pageSize)
@@ -53,7 +52,6 @@ class PartitionedFooterStamper extends SingleFileStamper {
 
     /*
      * Only this method knows about inside, outside, left or right on a page.
-     * TODO: takes account page dimensions
      * Page info is always stamped on the bottom of a page.
      * Left- or right orientation depends on odd/even page, as follows:
      * * even page, inside-orientation: page-nr stamped on right
@@ -63,7 +61,7 @@ class PartitionedFooterStamper extends SingleFileStamper {
      */
 
     protected void stampPageInfo(PdfContentByte canvas, Rectangle pageSize) {
-        println "stamping page info: " + joinPagePrefixAndNumber()
+      // TODO this code is ugly - refactor to something more readable
 
         if (isEven(processingState.totalNumberOfPagesSoFar)) {
 

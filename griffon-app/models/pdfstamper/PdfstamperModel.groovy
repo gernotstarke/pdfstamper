@@ -58,15 +58,17 @@ public class PdfstamperModel {
     String filePrefix = "Kapitel"
 
 
-    // other configuration options
-    //*************************************************
-    Boolean evenify = true    // ensure that every file has EVEN number of pages
-
     // either CENTER, OUTSIDE or INSIDE
     String pageNumberHorizontalPosition = HPOS.positions[HPOS.OUTSIDE]
 
-
     Boolean footerIsCentered = false
+
+
+
+    // evenify configuration options
+    //*************************************************
+    Boolean evenify = true    // to ensure that every file has EVEN number of pages
+    String blankPageText = "Diese Seite bleibt absichtlich frei"
 
 
 
@@ -94,7 +96,8 @@ public class PdfstamperModel {
                 pagePrefix: pagePrefix,
                 filePageSeparator: filePageSeparator,
                 pageNumberHorizontalPosition: pageNumberHorizontalPosition,
-                evenify: evenify)
+                evenify: evenify,
+                blankPageText: blankPageText)
 
     }
 

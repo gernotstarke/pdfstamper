@@ -1,32 +1,40 @@
 package pdfstamper
 
+import javax.swing.SwingConstants
 import java.awt.*
 
-statusBar = panel {
-    migLayout()
-    label(text: bind { model.status },
-            foreground: bind {model.statusColor},
-          constraints: 'left, grow')
+statusBar = vbox {
+    separator()
+    panel {
+        gridBagLayout()
+        label(id: 'status', text: bind { model.status }, foreground: bind { model.statusColor },
+                constraints: gbc(weightx: 1.0,
+                        anchor: GridBagConstraints.WEST,
+                        fill: GridBagConstraints.HORIZONTAL,
+                        insets: [1, 3, 1, 3])
+        )
+        separator(orientation: SwingConstants.VERTICAL, constraints: gbc(fill: GridBagConstraints.VERTICAL))
 
-    jideButton(label: "arc42.org",
-            id: 'arc42Button',
-            foreground: PdfStamperUIConstants.NICE_BLUE,
-            constraints: 'push, al right',
-            actionPerformed: {
-                if (Desktop.isDesktopSupported()) {
-                    Desktop desktop = Desktop.getDesktop();
-                    try {
-                        model.status = "arc42.org clicked... no browser available"
-                        model.statusColor = PdfStamperUIConstants.WARNING
-                        //desktop.browse(new URI('http://www.arc42.org'))
+        jideButton(label: "arc42.org",
+                id: 'arc42Button',
+                foreground: PdfStamperUIConstants.NICE_BLUE,
+
+                actionPerformed: {
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop desktop = Desktop.getDesktop();
+                        try {
+                            model.status = "launching browser to display arc42.org website..."
+                            model.statusColor = PdfStamperUIConstants.NICE_GREEN
+                            desktop.browse(new URI('http://www.arc42.org'))
+                        }
+                        catch (Exception ex) {
+                            log.info("no browser found to display arc42.org website", ex)
+                        }
                     }
-                    catch (Exception ex) {
-                        log.info("no browser found to display arc42.org website", ex)
-                    }
-                }
 
-            })
+                })
 
+    }
 }
 
 

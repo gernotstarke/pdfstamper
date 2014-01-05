@@ -21,6 +21,7 @@ class StamperConfiguration {
     String filePageSeparator = ", "
     String filePrefix = "Kapitel"
 
+    String blankPageText = "Diese Seite bleibt absichtlich frei"
 
     // other configuration options
     //*************************************************

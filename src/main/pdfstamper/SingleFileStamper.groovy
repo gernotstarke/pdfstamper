@@ -1,15 +1,13 @@
 package pdfstamper
 
 import com.itextpdf.awt.geom.Point
-import com.itextpdf.text.DocumentException
-import com.itextpdf.text.Element
-import com.itextpdf.text.Phrase
-import com.itextpdf.text.Rectangle
+import com.itextpdf.text.*
 import com.itextpdf.text.pdf.ColumnText
 import com.itextpdf.text.pdf.PdfContentByte
 import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.PdfStamper
 
+import java.awt.Color
 
 /**
  * Stamp every page of a single file.
@@ -37,7 +35,6 @@ abstract class SingleFileStamper {
     // an iText PdfStamper, created ONCE per file
     protected PdfStamper writer;
 
-
     /**
      * instances need a StamperConfiguration, otherwise they don't know what to stamp,
      * and in what orientation.
@@ -49,7 +46,6 @@ abstract class SingleFileStamper {
         this.config = configuration
         this.processingState = new ProcessingState()
     }
-
 
     /**
      * Stamps a pdf file by taking sourceFile and duplicating it to targetFile
@@ -73,7 +69,7 @@ abstract class SingleFileStamper {
         this.processingState = processingState
 
         // instantiate pdf reader and writer (in iText-lingo: stamper, here called writer)
-        setupStampingResources( sourceFileWithFullPath, targetFileWithFullPath)
+        setupStampingResources(sourceFileWithFullPath, targetFileWithFullPath)
 
 
         int nrOfPagesInThisFile = reader.getNumberOfPages()
@@ -81,30 +77,76 @@ abstract class SingleFileStamper {
         // loop over all pages in this file
         for (int currentPageInFile = 1; currentPageInFile <= nrOfPagesInThisFile; currentPageInFile += 1) {
             processingState.incrementTotalPageCount()
-            stampSinglePage( currentPageInFile )
+            stampSinglePage(currentPageInFile)
         }
 
-        if (config.evenify)
-            evenifyFile()
+        // evenify, if configured and current pagecount (== totalNumberOfPagesSoFar) is odd
+        if ((config.evenify) && ((processingState.totalNumberOfPagesSoFar % 2) == 1))
+            addBlankPageAfterLastRegularPage(nrOfPagesInThisFile)
+
 
         tearDownStampingResources()
 
-
     }
 
-    protected void evenifyFile() {
-        // TODO: really add blank page...
-        // quick hack: increment pagegount...
+
+    // avoid having open files
+    private void tearDownStampingResources() {
+        // reader cannot be closed - throws an awful lot of exceptions
+        //reader.close()
+        writer.close()
+    }
+
+
+    /**
+     * adds a blank page, if evenify is configured AND pagecount in this file is odd
+     *
+     * contract: must only be called if
+     * <ul>
+     *   <li> evenify is configured</li>
+     *   <li> and current pagecount is odd</li>
+     * </ul>
+     * @param nrOfPagesInThisFile number of pages in current source document
+     */
+    protected void addBlankPageAfterLastRegularPage(int nrOfPagesInThisFile) {
+
+        // get size of last page in document
+        Rectangle previousPageSize = reader.getPageSize(nrOfPagesInThisFile)
+
+        int nextPageNr = nrOfPagesInThisFile + 1
+
+        // add a page of identical size
+        writer.insertPage(nextPageNr, previousPageSize)
+        PdfContentByte canvas = writer.getOverContent(nextPageNr)
+
+        // stamp something like "deliberately left blank" on page
+
+        // find center of page
+        int blankTextPosX = (int) (previousPageSize.getWidth() / 2)
+        int blankTextPosY = (int) (previousPageSize.getTop() / 2)
+
+        // from iText
+        Font helveticaThirtyPt = new Font(Font.FontFamily.HELVETICA, new Float(30), Font.BOLD,  BaseColor.LIGHT_GRAY )
+
+        Phrase blankPagePhrase = new Phrase(0, new Chunk(config.blankPageText, helveticaThirtyPt))
+
+        ColumnText.showTextAligned(canvas,
+                Element.ALIGN_CENTER, blankPagePhrase, blankTextPosX,
+                blankTextPosY, new Float(45))
+
+        // as we added a page, we adjust the total page count
         processingState.incrementTotalPageCount()
+
+        stampSinglePage( nextPageNr )
     }
-/*
 
 
+
+     /*
      * 1.) make sure that source file exists
      * 2.) TODO: ensure source file is valid pdf
      * 3.) create reader and writer instance
      */
-
     private void setupStampingResources(String sourceFileWithFullPath, String targetFileWithFullPath) {
 
         // make sure source file exists, abort otherwise
@@ -116,23 +158,15 @@ abstract class SingleFileStamper {
     }
 
 
-    /*
-     * cleanup writer and reader instances - so they cannot accidently be re-used
-     */
-    void tearDownStampingResources() {
-        writer.close()
-        reader.close()
-    }
+/*
+ * add header and footer to a single page within the pdf file.
+ *
+ * The current processing state (e.g. files and pages processed so far)
+ * are kept in processingState
+ *
+ */
 
-
-    /*
-     * add header and footer to a single page within the pdf file.
-     *
-     * The current processing state (e.g. files and pages processed so far)
-     * are kept in processingState
-     *
-     */
-    private void stampSinglePage( int currentPageNumberInFile ) {
+    private void stampSinglePage(int currentPageNumberInFile) {
 
         // we have to extract the canvas, so we can actually perform the stamping
         PdfContentByte canvas = writer.getOverContent(currentPageNumberInFile);
@@ -141,49 +175,44 @@ abstract class SingleFileStamper {
         Rectangle pageSize = reader.getPageSize(currentPageNumberInFile);
 
         // do the header (always printed without pagenumber)
-        stampHeader( canvas, pageSize )
+        stampHeader(canvas, pageSize)
 
         // do the footer (might consist of two parts... we don't care here!)
-        stampFooter( canvas, pageSize )
-
+        stampFooter(canvas, pageSize)
 
         // stamp the footer onto the page
         //stampTextOnPage(canvas, position, Element.ALIGN_CENTER, textToStamp);
 
     }
 
+/**
+ * Stamps the header:
+ * First, calculates the header position, depending on page dimensions.
+ * TODO: Takes page dimensions into account.
+ *
+ */
+    public void stampHeader(PdfContentByte canvas, Rectangle pageSize) {
 
+        Point headerPosition = PositionsOnPage.calculateCenteredHeaderPosition(pageSize)
 
-    /**
-     * Stamps the header:
-     * First, calculates the header position, depending on page dimensions.
-     * TODO: Takes page dimensions into account.
-     *
-     */
-    public void stampHeader( PdfContentByte canvas, Rectangle pageSize ) {
-
-        Point headerPosition = PositionsOnPage.calculateCenteredHeaderPosition( pageSize )
-
-        stampTextOnPage( canvas, headerPosition, Element.ALIGN_CENTER, config.header )
+        stampTextOnPage(canvas, headerPosition, Element.ALIGN_CENTER, config.header)
     }
 
+/**
+ * stamping the footer can be done in different ways, depending
+ * on configuration settings:
+ * "CENTERED": join both file and page info
+ * "INSIDE" or "OUTSIDE": stamp file and page info independently
+ */
 
-    /**
-     * stamping the footer can be done in different ways, depending
-     * on configuration settings:
-     * "CENTERED": join both file and page info
-     * "INSIDE" or "OUTSIDE": stamp file and page info independently
-     */
+    abstract public void stampFooter(PdfContentByte canvas, Rectangle pageSize)
 
-    abstract public void stampFooter(PdfContentByte canvas, Rectangle pageSize )
-
-
-    /**
-     * stamps the centered (part of the) footer.
-     * @param pageSize
-     * @param canvas
-     */
-    protected void stampCenteredFooter(PdfContentByte canvas, Rectangle pageSize,  String textToStamp) {
+/**
+ * stamps the centered (part of the) footer.
+ * @param pageSize
+ * @param canvas
+ */
+    protected void stampCenteredFooter(PdfContentByte canvas, Rectangle pageSize, String textToStamp) {
 
         // determine appropriate position (centered, with some offset from the lower edge of the page
         Point footerPosition = PositionsOnPage.calculateCenteredFooterPosition(pageSize.getWidth())
@@ -192,39 +221,33 @@ abstract class SingleFileStamper {
         stampTextOnPage(canvas, footerPosition, Element.ALIGN_CENTER, textToStamp)
     }
 
-
-    /*
-     * join together the file-prefix with the current file number
-     */
+/*
+ * join together the file-prefix with the current file number
+ */
 
     protected String joinFilePrefixAndNumber() {
         return config.getFilePrefix() + " " + processingState.currentFileNumber.toString()
     }
 
-
-
-    /*
-     * join page-prefix with current page number
-     */
+/*
+ * join page-prefix with current page number
+ */
 
     protected String joinPagePrefixAndNumber() {
         return config.getPagePrefix() + " " + processingState.totalNumberOfPagesSoFar.toString()
     }
 
-
-
-
-    /**
-     * void stampTextOnPage: adds text at specified position on a page, represented by canvas
-     *
-     * @param canvas : the canvas to stamp on
-     * @param textToStamp : the string we have to print. Might contain a prefix.
-     *        Examples: "A-1", "42", "chapter 4, page 19"
-     * @param postion : the position as iText-Point where we have to stamp
-     * @param alignment : left-aligned, right-aligned or centered:
-     *
-     * @author Gernot Starke
-     * */
+/**
+ * void stampTextOnPage: adds text at specified position on a page, represented by canvas
+ *
+ * @param canvas : the canvas to stamp on
+ * @param textToStamp : the string we have to print. Might contain a prefix.
+ *        Examples: "A-1", "42", "chapter 4, page 19"
+ * @param postion : the position as iText-Point where we have to stamp
+ * @param alignment : left-aligned, right-aligned or centered:
+ *
+ * @author Gernot Starke
+ * */
     protected void stampTextOnPage(PdfContentByte canvas, Point position, int alignment, String textToStamp) {
 
         /*
@@ -239,12 +262,11 @@ abstract class SingleFileStamper {
 
     }
 
-
-    /**
-     * initializes the Pdf reader, so we can read one page after the other...
-     * @param sourceFile : name of the file we want to read.
-     * @return a reader instance
-     */
+/**
+ * initializes the Pdf reader, so we can read one page after the other...
+ * @param sourceFile : name of the file we want to read.
+ * @return a reader instance
+ */
     private initPdfReader(String sourceFile) {
         def PdfReader localReader
 
@@ -259,14 +281,13 @@ abstract class SingleFileStamper {
         return localReader
     }
 
-
-    /**
-     * Initializes the writer
-     *
-     * @param targetFile what is the file where we output our resulting pdf
-     * @param reader the pdf reader where we get the original content from
-     * @return a valid writer instance
-     */
+/**
+ * Initializes the writer
+ *
+ * @param targetFile what is the file where we output our resulting pdf
+ * @param reader the pdf reader where we get the original content from
+ * @return a valid writer instance
+ */
     private PdfStamper initPdfStamper(String targetFile, PdfReader reader) {
         def PdfStamper localStamper
 
@@ -283,7 +304,6 @@ abstract class SingleFileStamper {
 
         return localStamper
     }
-
 
 
 }

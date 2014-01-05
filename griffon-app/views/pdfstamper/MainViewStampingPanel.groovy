@@ -15,14 +15,14 @@ stampingPanel = panel(border: lineBorder(color: PdfStamperUIConstants.NICE_BLUE,
                     actionPerformed: controller.startStamping,
                     enabled: bind { model.startButtonEnabled }
             )
-            label(text: bind { model.totalNrOfPagesSoFar },
+            /*label(text: bind { model.totalNrOfPagesSoFar },
                     id: 'NrOfPagesProcessed',
                     foreground: Color.LIGHT_GRAY,
-                    constraints: '')
+                    constraints: 'ski')
             label(' pages already processed',
                     foreground: Color.LIGHT_GRAY,
                     constraints: 'skip')
-
+           */
             button('Cancel',
                     constraints: 'push, al right',
                     actionPerformed: controller.quit

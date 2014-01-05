@@ -168,12 +168,12 @@ configurationPanel =
                     )
 
 
-                    label('e.g.',
+                    /*label('e.g.',
                             foreground: Color.LIGHT_GRAY,
                             constraints: 'skip',
                             visible: bind { model.footerIsCentered })
 
-                   /* label(text: bind(source: model,
+                    label(text: bind(source: model,
                                     sourceProperty: 'sampleFooter',
                                     sourceEvent: 'propertyChange',
                                     converter: model.calcSampleFooter),
@@ -195,12 +195,21 @@ configurationPanel =
                     // evenify flag
                     // ===================================================
 
-                    label 'Evenify:', constraints: 'skip'
+                    label 'Evenify:', constraints: ''
                     checkBox(id: 'evenifyCheck',
                             selected: bind(target: model, 'evenify', value: true),
-                            constraints: 'left',
+                            constraints: '',
                             mouseEntered: { evenifyBaloon.visible = true },
                             mouseExited: { evenifyBaloon.visible = false })
+
+                    textField(id: 'blankPageText',
+                            columns: 25,
+                            constraints: 'wrap',
+                            text: bind(target: model, 'blankPageText', value: 'Diese Seite bleibt absichtlich frei '),
+                            visible: bind { model.evenify},
+                            mouseEntered: { filePageSeparatorBaloon.visible = true },
+                            mouseExited: { filePageSeparatorBaloon.visible = false }
+                    )
 
 
                     balloonTip(evenifyCheck,
