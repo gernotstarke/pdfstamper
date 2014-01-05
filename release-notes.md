@@ -1,6 +1,15 @@
 
 # PdfStamper Release Notes
 
+### 1.0 (Jan 5th 2014)
+UI overhaul, cleaned up messy code, introduced several config options:
+
+* evenify option now works
+* blank page text now configurable
+* Page number position configurable
+
+
+
 ### 0.9d (April 1st 2013)
 Solved the odd-page-problem: Every chapter of a book (or handout) should normally start on an ODD page number.
 
