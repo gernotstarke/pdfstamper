@@ -7,8 +7,6 @@ import com.itextpdf.text.pdf.PdfContentByte
 import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.PdfStamper
 
-import java.awt.Color
-
 /**
  * Stamp every page of a single file.
  * Provides implementations for stamping the header and stamping a centered footer.
@@ -89,14 +87,12 @@ abstract class SingleFileStamper {
 
     }
 
-
     // avoid having open files
     private void tearDownStampingResources() {
         // reader cannot be closed - throws an awful lot of exceptions
         //reader.close()
         writer.close()
     }
-
 
     /**
      * adds a blank page, if evenify is configured AND pagecount in this file is odd
@@ -126,7 +122,7 @@ abstract class SingleFileStamper {
         int blankTextPosY = (int) (previousPageSize.getTop() / 2)
 
         // from iText
-        Font helveticaThirtyPt = new Font(Font.FontFamily.HELVETICA, new Float(30), Font.BOLD,  BaseColor.LIGHT_GRAY )
+        Font helveticaThirtyPt = new Font(Font.FontFamily.HELVETICA, new Float(30), Font.BOLD, BaseColor.LIGHT_GRAY)
 
         Phrase blankPagePhrase = new Phrase(0, new Chunk(config.blankPageText, helveticaThirtyPt))
 
@@ -137,16 +133,15 @@ abstract class SingleFileStamper {
         // as we added a page, we adjust the total page count
         processingState.incrementTotalPageCount()
 
-        stampSinglePage( nextPageNr )
+        stampSinglePage(nextPageNr)
     }
 
+    /*
+    * 1.) make sure that source file exists
+    * 2.) TODO: ensure source file is valid pdf
+    * 3.) create reader and writer instance
+    */
 
-
-     /*
-     * 1.) make sure that source file exists
-     * 2.) TODO: ensure source file is valid pdf
-     * 3.) create reader and writer instance
-     */
     private void setupStampingResources(String sourceFileWithFullPath, String targetFileWithFullPath) {
 
         // make sure source file exists, abort otherwise
@@ -156,7 +151,6 @@ abstract class SingleFileStamper {
         reader = initPdfReader(sourceFileWithFullPath)
         writer = initPdfStamper(targetFileWithFullPath, reader)
     }
-
 
 /*
  * add header and footer to a single page within the pdf file.
@@ -211,6 +205,7 @@ abstract class SingleFileStamper {
  * stamps the centered (part of the) footer.
  * @param pageSize
  * @param canvas
+ *
  */
     protected void stampCenteredFooter(PdfContentByte canvas, Rectangle pageSize, String textToStamp) {
 
@@ -223,14 +218,22 @@ abstract class SingleFileStamper {
 
 /*
  * join together the file-prefix with the current file number
+ * if filePrefix is empty, return empty string.
  */
 
     protected String joinFilePrefixAndNumber() {
-        return config.getFilePrefix() + " " + processingState.currentFileNumber.toString()
+        String filePrefix = config.getFilePrefix()
+        String result
+        if (filePrefix == "")
+            result = ""
+        else result = filePrefix + " " + processingState.currentFileNumber.toString()
+
+        return result
     }
 
 /*
  * join page-prefix with current page number
+ *
  */
 
     protected String joinPagePrefixAndNumber() {

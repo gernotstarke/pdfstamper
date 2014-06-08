@@ -11,3 +11,6 @@ build
 staging
 .gradle
 target
+.idea
+dist
+out

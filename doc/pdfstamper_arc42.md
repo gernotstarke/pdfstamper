@@ -1,7 +1,13 @@
 # Documentation for the arc42 pdfStamper, a page numberizer
+# Documentation for the arc42 pdfStamper, a page numberizer
 
-Version: May 4th 2013, Gernot Starke(Star Wars day of the year: may the fourth be with you…)
-See the [release notes](#header_relnotes) for (boring) organizational info.
+Version: May 4th 2013, Gernot Starke
+
+(Star Wars day of the year: may the fourth be with you…)
+
+
+See the [release notes](#header_relnotes) for (boring) organizational info.
+
 ##### Contents
 
 1. [Intro and Requirements](#header_intro)         
@@ -16,7 +22,8 @@ Version: May 4th 2013, Gernot Starke(Star Wars day of the year: may the fourth
     * Build 
 7. [Developer Guide](#header_developer)
 	* Directory layout 	
-8. [Glossary](#header_glossary)9. [Release Notes](#header_relnotes)
+8. [Glossary](#header_glossary)
+9. [Release Notes](#header_relnotes)
 
 ## [Intro and Requirements](id:header_intro)
 We create PDF files from various sources (ppt, odt, doc, keynote, html...) and want to create nice printable handouts from these sources.
@@ -27,7 +34,12 @@ With these various document sources, it's neither possible to create consistent 
 
 Instead of flushing down many many bucks into A****s hungry mouth I decided to create this solution on my own.
 
-### Preconditions1. The *content* of the files has been converted to pdf (so we're not concerned about the original data or file formats nor the tools to create/manipulate the original content).2. The dimensions (pagesize) of the pdf files identical (we assume A4-portrait in most cases).3. The existing pdf files are *not* encrypted.  
+### Preconditions
+
+1. The *content* of the files has been converted to pdf (so we're not concerned about the original data or file formats nor the tools to create/manipulate the original content).
+2. The dimensions (pagesize) of the pdf files identical (we assume A4-portrait in most cases).
+3. The existing pdf files are *not* encrypted.
+  
 
 ### Use Cases
 
@@ -237,7 +249,33 @@ We stamp several pregenerated pdf files and compare the resulting pagecount.
  
 
 
----## [Glossary](id:header_glossary)---acceptance test: a blackbox testcase of a system use case.arc42: Template for software architecture documentation.evenify:itext:pdf:stamping:---## [Release Notes](id:header_relnotes)---* May 4th 2013: merged with previous version in atopdf-project.* Feb 25th 2013: added release notes, glossary, updated use cases* Dec 14th 2012: updated structure, included developer guide* Dec 1st 2012: initial markdown version, converted from TiddlyWiki
+---
+## [Glossary](id:header_glossary)
+---
+
+acceptance test: a blackbox testcase of a system use case.
+
+arc42: Template for software architecture documentation.
+
+evenify:
+
+itext:
+
+pdf:
+
+stamping:
+
+
+
+
+
+---
+## [Release Notes](id:header_relnotes)
+---
+* May 4th 2013: merged with previous version in atopdf-project.
+* Feb 25th 2013: added release notes, glossary, updated use cases
+* Dec 14th 2012: updated structure, included developer guide
+* Dec 1st 2012: initial markdown version, converted from TiddlyWiki
 
 ---
 [url_itext]: http://itextpdf.com "iText Pdf Library"

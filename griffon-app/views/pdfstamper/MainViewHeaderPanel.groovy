@@ -3,7 +3,7 @@ package pdfstamper
 
     headerPanel = bannerPanel(
             title: 'Pdf Stamper',
-            subtitle: 'add pagenumbers and headers to your pdf files...',
+            subtitle: 'add pagenumbers and headers to your pdf files... (v2)',
             titleIcon: imageIcon('/pdfstamper-logo-90px.png'),
             titleColor: PdfStamperUIConstants.TITLECOLOR,
             subTitleColor: PdfStamperUIConstants.SUBTITLE,
