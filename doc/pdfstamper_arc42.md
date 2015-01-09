@@ -225,6 +225,13 @@ Griffon provides build targets, up to the generation of OS-specific installers.
 
 PdfStamper is currently only pre-build for Mac-OS, resulting in a .dmg file.
  
+#### Building the Mac-OS Application
+
+Run the
+ 
+     griffon package mac
+     
+command. 
 
 ### Acceptance Testing
 The app was developed in _acceptance test driven development_ (ATDD) style: Before I wrote productive code, I formulated the appropriate acceptance test as [Spock Specification][url_spock].
