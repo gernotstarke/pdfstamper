@@ -11,6 +11,7 @@
 		0C6596B01B35683F009A065F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6596AF1B35683F009A065F /* Images.xcassets */; };
 		0C6596B31B35683F009A065F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6596B11B35683F009A065F /* MainMenu.xib */; };
 		0C6596BF1B35683F009A065F /* pdfstamperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6596BE1B35683F009A065F /* pdfstamperTests.swift */; };
+		0CE330511B37206700CA377A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE330501B37206700CA377A /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		0C6596B81B35683F009A065F /* pdfstamperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pdfstamperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C6596BD1B35683F009A065F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C6596BE1B35683F009A065F /* pdfstamperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdfstamperTests.swift; sourceTree = "<group>"; };
+		0CE330501B37206700CA377A /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				0C6596AD1B35683F009A065F /* AppDelegate.swift */,
 				0C6596AF1B35683F009A065F /* Images.xcassets */,
 				0C6596B11B35683F009A065F /* MainMenu.xib */,
+				0CE330501B37206700CA377A /* RootViewController.swift */,
 				0C6596AB1B35683F009A065F /* Supporting Files */,
 			);
 			path = pdfstamper;
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CE330511B37206700CA377A /* RootViewController.swift in Sources */,
 				0C6596AE1B35683F009A065F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +400,7 @@
 				0C6596C41B35683F009A065F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C6596C51B35683F009A065F /* Build configuration list for PBXNativeTarget "pdfstamperTests" */ = {
 			isa = XCConfigurationList;
@@ -404,6 +409,7 @@
 				0C6596C71B35683F009A065F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
