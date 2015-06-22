@@ -11,6 +11,13 @@
 
 * On the UI, you can configure a file-prefix and page-number-prefix. 
 
+
+---
+    I started work on a major rewrite as native Mac-OS application. The previous Griffon
+    version has moved to subdirectory ./griffon-stamper
+
+
+
 ## Prerequisites
 
 * all pdf files are located within (current or configured) directory
