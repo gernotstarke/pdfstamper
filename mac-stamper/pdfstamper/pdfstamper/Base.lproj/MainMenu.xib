@@ -172,19 +172,19 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MbT-02-zj5">
-                        <rect key="frame" x="519" y="8" width="59" height="17"/>
-                        <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" title="arc42.de" usesSingleLineMode="YES" id="CuF-SX-9nA">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nUY-dW-LRU">
+                        <rect key="frame" x="8" y="8" width="236" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(pdfstamper version mac-0.1" id="Wjf-P1-waq">
                             <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" red="0.098039217289999994" green="0.27450981740000002" blue="0.58039218189999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.038967642155890068" green="0.43718521643166586" blue="0.23310490241349471" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nUY-dW-LRU">
-                        <rect key="frame" x="8" y="8" width="476" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Wjf-P1-waq">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" red="0.038967642155890068" green="0.43718521643166586" blue="0.23310490241349471" alpha="1" colorSpace="calibratedRGB"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wPX-Xp-eBB">
+                        <rect key="frame" x="186" y="291" width="114" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0 files found" id="mAr-cW-QGU">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" red="0.038967642160000003" green="0.43718521640000002" blue="0.23310490240000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -208,7 +208,7 @@
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="96n-2I-lTZ">
-                        <rect key="frame" x="466" y="56" width="90" height="25"/>
+                        <rect key="frame" x="563" y="56" width="90" height="25"/>
                         <buttonCell key="cell" type="roundTextured" title="Cancel" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wy8-NY-lJN">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -307,11 +307,11 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wPX-Xp-eBB">
-                        <rect key="frame" x="186" y="291" width="114" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0 files found" id="mAr-cW-QGU">
-                            <font key="font" metaFont="miniSystem"/>
-                            <color key="textColor" red="0.038967642160000003" green="0.43718521640000002" blue="0.23310490240000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MbT-02-zj5">
+                        <rect key="frame" x="610" y="8" width="59" height="17"/>
+                        <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" title="arc42.de" usesSingleLineMode="YES" id="CuF-SX-9nA">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" red="0.098039217289999994" green="0.27450981740000002" blue="0.58039218189999997" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
