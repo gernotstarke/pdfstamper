@@ -8,6 +8,7 @@ pdfstamper.iml
 .idea/.name
 .idea/compiler.xml
 build
+*.xccheckout
 staging
 .gradle
 target
