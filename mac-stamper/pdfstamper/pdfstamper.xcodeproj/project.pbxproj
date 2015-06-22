@@ -12,6 +12,8 @@
 		0C6596B31B35683F009A065F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C6596B11B35683F009A065F /* MainMenu.xib */; };
 		0C6596BF1B35683F009A065F /* pdfstamperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6596BE1B35683F009A065F /* pdfstamperTests.swift */; };
 		0CE330511B37206700CA377A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE330501B37206700CA377A /* RootViewController.swift */; };
+		0CE330541B3750FF00CA377A /* arc42-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE330521B3750FF00CA377A /* arc42-logo.png */; };
+		0CE330551B3750FF00CA377A /* pdfstamper-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE330531B3750FF00CA377A /* pdfstamper-logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		0C6596BD1B35683F009A065F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C6596BE1B35683F009A065F /* pdfstamperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdfstamperTests.swift; sourceTree = "<group>"; };
 		0CE330501B37206700CA377A /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		0CE330521B3750FF00CA377A /* arc42-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arc42-logo.png"; path = "pdfstamper/arc42-logo.png"; sourceTree = "<group>"; };
+		0CE330531B3750FF00CA377A /* pdfstamper-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pdfstamper-logo.png"; path = "pdfstamper/pdfstamper-logo.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 		0C65969F1B35683F009A065F = {
 			isa = PBXGroup;
 			children = (
+				0CE330521B3750FF00CA377A /* arc42-logo.png */,
+				0CE330531B3750FF00CA377A /* pdfstamper-logo.png */,
 				0C6596AA1B35683F009A065F /* pdfstamper */,
 				0C6596BB1B35683F009A065F /* pdfstamperTests */,
 				0C6596A91B35683F009A065F /* Products */,
@@ -191,6 +197,8 @@
 			files = (
 				0C6596B01B35683F009A065F /* Images.xcassets in Resources */,
 				0C6596B31B35683F009A065F /* MainMenu.xib in Resources */,
+				0CE330551B3750FF00CA377A /* pdfstamper-logo.png in Resources */,
+				0CE330541B3750FF00CA377A /* arc42-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
