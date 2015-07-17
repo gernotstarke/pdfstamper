@@ -221,33 +221,6 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JcF-CH-0Cc">
-                        <rect key="frame" x="0.0" y="358" width="658" height="108"/>
-                        <view key="contentView">
-                            <rect key="frame" x="1" y="1" width="656" height="106"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="stF-pH-G9Q">
-                                    <rect key="frame" x="559" y="10" width="87" height="87"/>
-                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="pdfstamper-logo" id="Oga-1V-mB5"/>
-                                </imageView>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7DC-O4-S3M">
-                                    <rect key="frame" x="4" y="15" width="121" height="86"/>
-                                    <imageCell key="cell" alignment="left" imageScaling="proportionallyUpOrDown" image="arc42-logo" id="NIt-ep-CsM"/>
-                                </imageView>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4I-S9-7VF">
-                                    <rect key="frame" x="181" y="4" width="332" height="17"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="add pagenumbers and headers to your PDF files ..." id="ocj-3M-plC">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" red="0.098039217289999994" green="0.27450981740000002" blue="0.58039218189999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                            </subviews>
-                        </view>
-                        <color key="borderColor" red="0.14052635732323238" green="0.14052635732323238" blue="0.14052635732323238" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
-                        <color key="fillColor" red="0.24588557806647121" green="0.66056946135197447" blue="0.94432933226363636" alpha="1" colorSpace="calibratedRGB"/>
-                    </box>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="klF-4S-nUX">
                         <rect key="frame" x="14" y="302" width="146" height="32"/>
                         <buttonCell key="cell" type="push" title="Source directory:" bezelStyle="rounded" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iHd-mD-bgE">
@@ -315,6 +288,33 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JcF-CH-0Cc">
+                        <rect key="frame" x="0.0" y="358" width="681" height="108"/>
+                        <view key="contentView">
+                            <rect key="frame" x="1" y="1" width="679" height="106"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="stF-pH-G9Q">
+                                    <rect key="frame" x="575" y="10" width="87" height="87"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="pdfstamper-logo" id="Oga-1V-mB5"/>
+                                </imageView>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7DC-O4-S3M">
+                                    <rect key="frame" x="4" y="15" width="121" height="86"/>
+                                    <imageCell key="cell" alignment="left" imageScaling="proportionallyUpOrDown" image="arc42-logo" id="NIt-ep-CsM"/>
+                                </imageView>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4I-S9-7VF">
+                                    <rect key="frame" x="181" y="4" width="332" height="17"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="add pagenumbers and headers to your PDF files ..." id="ocj-3M-plC">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" red="0.098039217289999994" green="0.27450981740000002" blue="0.58039218189999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" red="0.14052635732323238" green="0.14052635732323238" blue="0.14052635732323238" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
+                        <color key="fillColor" red="0.24588557806647121" green="0.66056946135197447" blue="0.94432933226363636" alpha="1" colorSpace="calibratedRGB"/>
+                    </box>
                 </subviews>
             </view>
             <point key="canvasLocation" x="-46.5" y="168"/>
