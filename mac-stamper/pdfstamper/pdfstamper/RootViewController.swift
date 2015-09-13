@@ -16,7 +16,7 @@ class RootViewController: NSViewController {
     }
     
     override func awakeFromNib() {
-        println("(arc42) View controller instance with view: \(self.view)")
+        print("(arc42) View controller instance with view: \(self.view)")
     }
     
 }
