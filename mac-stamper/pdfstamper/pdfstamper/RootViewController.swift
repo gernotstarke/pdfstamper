@@ -34,10 +34,13 @@ class RootViewController: NSViewController {
     
     
     // MARK button actions
+    // ===================
     @IBAction func sourceDirButton(sender: AnyObject) {
+        selectSourceDirectory()
     }
     
     @IBAction func targetDirButton(sender: AnyObject) {
+        selectTargetDirectory()
     }
     
     @IBAction func startButton(sender: AnyObject) {
@@ -52,7 +55,8 @@ class RootViewController: NSViewController {
     
     
     
-    // MARK override
+    // MARK override funcs
+    // ====================
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,11 +70,83 @@ class RootViewController: NSViewController {
         
     }
 
+    
     override func awakeFromNib() {
     
         print("(arc42) View controller instance with view: \(self.view)")
     }
     
+    
+    // open directory chooser (NSOpenPanel)
+    // ====================================
+    private func selectSourceDirectory() {
+        let openPanel = directoryOpenPanel("Select Source Directory")
+        openPanel.beginWithCompletionHandler( {(result:Int) in
+            if(result == NSFileHandlingPanelOKButton)
+            {
+                let fileURL = openPanel.URL!
+                print("path = \(fileURL.path!)")
+                
+                // Now we have a directory selected. Its URL = fileURL
+                self.sourceDirTextField.stringValue = "\(fileURL.path!)"
+                self.sourceDirStatusLabelColor = NSColor.blueColor()
+                self.setSourceDirStatusLabel("\(self.nrOfPdfFilesInFolder( fileURL )) pdf files found")
+                
+            }
+        })
+    }
+    
+    private func selectTargetDirectory() {
+        let openPanel = directoryOpenPanel("Select Target Directory")
+        openPanel.beginWithCompletionHandler( {(result:Int) in
+            if(result == NSFileHandlingPanelOKButton)
+            {
+                let fileURL = openPanel.URL!
+                print("path = \(fileURL.path!)")
+                
+                // Now we have a directory selected. Its URL = fileURL
+                self.targetDirTextField.stringValue = "\(fileURL.path!)"
+                self.targetDirStatusLabelColor = NSColor.blueColor()
+                self.setTargetDirStatusLabel("\(self.nrOfPdfFilesInFolder( fileURL )) pdf files found")
+                
+            }
+        })
+    }
+    
+    // configure the directory open panel
+    // ----------------------------------
+    private func directoryOpenPanel( title: String ) -> NSOpenPanel {
+        let openPanel = NSOpenPanel()
+        openPanel.title = title
+        openPanel.canChooseDirectories = true
+        openPanel.allowsMultipleSelection = false
+        openPanel.canCreateDirectories = false
+        openPanel.canChooseFiles = false
+ 
+        return openPanel
+    }
+    
+    // count nr of pdf files
+    // =====================
+    private func nrOfPdfFilesInFolder( folderPath: NSURL ) -> Int {
+        var count = 0
+        
+        let fileManager = NSFileManager.defaultManager()
+        let keys = [NSURLIsDirectoryKey]
+        
+        let enumerator:NSDirectoryEnumerator? = fileManager.enumeratorAtURL(
+            folderPath,
+            includingPropertiesForKeys: keys,
+            options: NSDirectoryEnumerationOptions(),
+            errorHandler: nil)
+        
+        while let url = enumerator!.nextObject() as! NSURL! {
+            count += 1
+        }
+        
+        return count
+    }
+
     
     // initialization functions
     // ========================
