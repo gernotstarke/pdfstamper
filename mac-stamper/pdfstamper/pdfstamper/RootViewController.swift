@@ -14,6 +14,10 @@ class RootViewController: NSViewController {
     // (in versionLabel)
     let appName: String = "org.arc42.PdfStamper"
     var appVersionInfo: String = "-.-.-"
+
+    
+    var myModel: PdfStamperModel = PdfStamperModel.init()
+  
     
     
     // MARK labels and textfields
@@ -47,6 +51,7 @@ class RootViewController: NSViewController {
     }
     
     @IBAction func cancelButton(sender: AnyObject) {
+            NSApplication.sharedApplication().terminate(self)
     }
    
     @IBAction func arc42LabelButton(sender: AnyObject) {
@@ -76,7 +81,8 @@ class RootViewController: NSViewController {
     
     override func awakeFromNib() {
     
-        print("(arc42) View controller instance with view: \(self.view)")
+        print("awakeFromNib:  \(self.className)")
+        
     }
     
     
@@ -84,19 +90,17 @@ class RootViewController: NSViewController {
     // ====================================
     private func selectSourceDirectory() {
         let openPanel = directoryOpenPanel("Select Source Directory")
-        openPanel.beginWithCompletionHandler( {(result:Int) in
-            if(result == NSFileHandlingPanelOKButton)
-            {
-                let fileURL = openPanel.URL!
-                print("path = \(fileURL.path!)")
-                
-                // Now we have a directory selected. Its URL = fileURL
-                self.sourceDirTextField.stringValue = "\(fileURL.path!)"
-                self.sourceDirStatusLabelColor = NSColor.blueColor()
+        
+        // TODO: remove beginWithCompletionHandler
+        if (openPanel.runModal() == NSFileHandlingPanelOKButton) {
+            let fileURL = openPanel.URL!
+                //print("path = \(fileURL.path!)")
+            self.sourceDirTextField.stringValue = "\(fileURL.path!)"
+                self.sourceDirStatusLabelColor = self.fieldValidityToColor( true )
                 self.setSourceDirStatusLabel("\(self.nrOfPdfFilesInFolder( fileURL )) pdf files found")
                 
-            }
-        })
+        }
+        
     }
     
     /// TODO
@@ -163,6 +167,14 @@ class RootViewController: NSViewController {
         return count
     }
 
+    /// convert text field validity to label color
+    private func fieldValidityToColor(valid: Bool) -> NSColor! {
+        switch valid {
+        case true:  return NSColor.blueColor()
+        case false: return NSColor.redColor()
+        }
+    }
+    
     
     // initialization functions
     // ========================
