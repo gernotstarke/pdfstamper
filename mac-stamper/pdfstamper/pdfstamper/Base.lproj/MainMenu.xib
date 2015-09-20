@@ -119,8 +119,6 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="455" y="299" width="681" height="466"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <value key="minSize" type="size" width="566" height="360"/>
-            <value key="maxSize" type="size" width="566" height="360"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="681" height="466"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -167,23 +165,23 @@
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MWp-lv-ea4">
                         <rect key="frame" x="185" y="224" width="371" height="22"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" toolTip="Text stamped on every page header" title="arc42 Workshop" drawsBackground="YES" id="bL2-3O-82f">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" toolTip="Text stamped on every page header" drawsBackground="YES" id="bL2-3O-82f">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nUY-dW-LRU">
-                        <rect key="frame" x="8" y="8" width="236" height="17"/>
+                        <rect key="frame" x="8" y="4" width="236" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="pdfstamper version mac-0.1" id="Wjf-P1-waq">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" red="0.038967642155890068" green="0.43718521643166586" blue="0.23310490241349471" alpha="1" colorSpace="calibratedRGB"/>
+                            <font key="font" size="9" name=".HelveticaNeueDeskInterface-Regular"/>
+                            <color key="textColor" red="0.031571745693674089" green="0.37277154850237293" blue="0.19990421680722642" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wPX-Xp-eBB">
-                        <rect key="frame" x="186" y="291" width="114" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0 files found" id="mAr-cW-QGU">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wPX-Xp-eBB" userLabel="sourceDirStatusLabel">
+                        <rect key="frame" x="186" y="291" width="131" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="no source directory selected" id="mAr-cW-QGU">
                             <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" red="0.038967642160000003" green="0.43718521640000002" blue="0.23310490240000001" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -191,19 +189,19 @@
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="th1-Z8-nMO">
                         <rect key="frame" x="183" y="100" width="22" height="18"/>
-                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aaQ-za-ckJ">
+                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="aaQ-za-ckJ">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="546-XZ-wHQ">
-                        <rect key="frame" x="6" y="25" width="564" height="4"/>
+                        <rect key="frame" x="6" y="25" width="564" height="5"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="gO8-9D-fHG">
-                        <rect key="frame" x="12" y="258" width="564" height="5"/>
+                        <rect key="frame" x="12" y="249" width="564" height="5"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
@@ -214,19 +212,28 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="cancelButton:" target="1VQ-VG-HGB" id="ZmM-FJ-bII"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JKR-XD-6MK">
                         <rect key="frame" x="22" y="56" width="116" height="25"/>
-                        <buttonCell key="cell" type="roundTextured" title="Start" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" sound="Funk" inset="2" id="AdR-fV-8pa">
+                        <buttonCell key="cell" type="roundTextured" title="Start" bezelStyle="texturedRounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" sound="Funk" inset="2" id="AdR-fV-8pa">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="startButton:" target="1VQ-VG-HGB" id="4jZ-6l-Dzi"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="klF-4S-nUX">
                         <rect key="frame" x="14" y="302" width="146" height="32"/>
                         <buttonCell key="cell" type="push" title="Source directory:" bezelStyle="rounded" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iHd-mD-bgE">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <connections>
+                                <action selector="sourceDirButton:" target="1VQ-VG-HGB" id="6mi-Gx-LeN"/>
+                            </connections>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZl-CG-bSf">
@@ -234,11 +241,14 @@
                         <buttonCell key="cell" type="push" title="Target directory:" bezelStyle="rounded" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aN2-Ih-ZIC">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <connections>
+                                <action selector="targetDirButton:" target="1VQ-VG-HGB" id="jjt-uq-vBv"/>
+                            </connections>
                         </buttonCell>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrz-Jx-YA6">
                         <rect key="frame" x="185" y="192" width="96" height="22"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Qcf-x4-vXf">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Qcf-x4-vXf">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -246,7 +256,7 @@
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jvb-lR-AAh">
                         <rect key="frame" x="185" y="159" width="96" height="22"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1q5-lC-Mh7">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1q5-lC-Mh7">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -254,7 +264,7 @@
                     </textField>
                     <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FyG-Ej-qwH">
                         <rect key="frame" x="185" y="125" width="99" height="26"/>
-                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="3" id="SBn-hd-ssv">
+                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="3" id="SBn-hd-ssv">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -279,14 +289,6 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MbT-02-zj5">
-                        <rect key="frame" x="610" y="8" width="59" height="17"/>
-                        <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" title="arc42.de" usesSingleLineMode="YES" id="CuF-SX-9nA">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" red="0.098039217289999994" green="0.27450981740000002" blue="0.58039218189999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JcF-CH-0Cc">
@@ -316,12 +318,37 @@
                         <color key="borderColor" red="0.14052635732323238" green="0.14052635732323238" blue="0.14052635732323238" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
                         <color key="fillColor" red="0.24588557806647121" green="0.66056946135197447" blue="0.94432933226363636" alpha="1" colorSpace="calibratedRGB"/>
                     </box>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="avj-ih-nWY">
+                        <rect key="frame" x="568" y="7" width="85" height="14"/>
+                        <buttonCell key="cell" type="inline" title="arc42.de" bezelStyle="inline" alignment="center" inset="2" id="iRz-Sf-pmp">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" size="11" name=".HelveticaNeueDeskInterface-Regular"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="arc42LabelButton:" target="1VQ-VG-HGB" id="LHE-ft-Wij"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hsA-CP-fd8" userLabel="targetDirStatusLabel">
+                        <rect key="frame" x="186" y="254" width="127" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="no target directory selected" id="jh0-QD-XhW">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" red="0.038967642160000003" green="0.43718521640000002" blue="0.23310490240000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-46.5" y="168"/>
+            <point key="canvasLocation" x="-112.5" y="160"/>
         </window>
         <viewController id="1VQ-VG-HGB" customClass="RootViewController" customModule="pdfstamper" customModuleProvider="target">
             <connections>
+                <outlet property="arc42Label" destination="avj-ih-nWY" id="cOY-cA-or5"/>
+                <outlet property="sourceDirStatusLabel" destination="wPX-Xp-eBB" id="zJK-cC-Xiy"/>
+                <outlet property="sourceDirTextField" destination="gyl-15-FAd" id="dS9-EA-Pbj"/>
+                <outlet property="startButton" destination="AdR-fV-8pa" id="leD-lT-cze"/>
+                <outlet property="targetDirStatusLabel" destination="hsA-CP-fd8" id="wXo-rP-cQJ"/>
+                <outlet property="targetDirTextField" destination="pgV-lb-mjF" id="uaU-ip-4Wi"/>
+                <outlet property="versionLabel" destination="nUY-dW-LRU" id="fvb-Ww-hMS"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="sKH-N1-aMV"/>
             </connections>
         </viewController>
