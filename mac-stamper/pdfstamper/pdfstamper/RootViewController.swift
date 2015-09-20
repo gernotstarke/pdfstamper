@@ -92,6 +92,7 @@ class RootViewController: NSViewController {
     }
     
     private func setTargetDirStatusLabel( targetDirStatus: String) {
+        setLabelTextAndColor( targetDirStatusLabel, text: targetDirStatus, color: targetDirStatusLabelColor)
         
     }
     
