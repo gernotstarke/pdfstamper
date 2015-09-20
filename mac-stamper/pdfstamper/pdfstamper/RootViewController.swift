@@ -33,7 +33,7 @@ class RootViewController: NSViewController {
     @IBOutlet weak var startButton: NSButtonCell!
     
     
-    // MARK button actions
+    // button actions
     // ===================
     @IBAction func sourceDirButton(sender: AnyObject) {
         selectSourceDirectory()
@@ -55,7 +55,7 @@ class RootViewController: NSViewController {
     
     
     
-    // MARK override funcs
+    // override funcs
     // ====================
     
     override func viewDidLoad() {
@@ -67,6 +67,9 @@ class RootViewController: NSViewController {
         
         setSourceDirStatusLabel("no source directory selected")
         setTargetDirStatusLabel("no target directory selected")
+        
+        disableTextField( sourceDirTextField )
+        disableTextField( targetDirTextField )
         
     }
 
@@ -96,25 +99,37 @@ class RootViewController: NSViewController {
         })
     }
     
+    /// TODO
     private func selectTargetDirectory() {
         let openPanel = directoryOpenPanel("Select Target Directory")
-        openPanel.beginWithCompletionHandler( {(result:Int) in
-            if(result == NSFileHandlingPanelOKButton)
-            {
-                let fileURL = openPanel.URL!
-                print("path = \(fileURL.path!)")
-                
-                // Now we have a directory selected. Its URL = fileURL
-                self.targetDirTextField.stringValue = "\(fileURL.path!)"
-                self.targetDirStatusLabelColor = NSColor.blueColor()
-                self.setTargetDirStatusLabel("\(self.nrOfPdfFilesInFolder( fileURL )) pdf files found")
-                
-            }
-        })
+        
+        if (openPanel.runModal() == NSFileHandlingPanelOKButton) {
+            let fileURL = openPanel.URL!
+            print("path = \(fileURL.path!)")
+            
+            // Now we have a directory selected. Its URL = fileURL
+            self.targetDirTextField.stringValue = "\(fileURL.path!)"
+         
+            // TODO
+            self.targetDirStatusLabelColor = NSColor.blueColor()
+            self.setTargetDirStatusLabel("\(self.nrOfPdfFilesInFolder( fileURL )) pdf files found")
+        }
+        // either user pressed cancel or any other obscure error happened
+        else {
+            
+        }
+        
     }
     
-    // configure the directory open panel
-    // ----------------------------------
+/// disable text field
+/// ------------------
+    private func disableTextField(textField: NSTextField!) {
+        textField.enabled = false
+    }
+
+    
+// create directory selection panel
+// ----------------------------------
     private func directoryOpenPanel( title: String ) -> NSOpenPanel {
         let openPanel = NSOpenPanel()
         openPanel.title = title
@@ -122,9 +137,10 @@ class RootViewController: NSViewController {
         openPanel.allowsMultipleSelection = false
         openPanel.canCreateDirectories = false
         openPanel.canChooseFiles = false
- 
+        
         return openPanel
     }
+    
     
     // count nr of pdf files
     // =====================

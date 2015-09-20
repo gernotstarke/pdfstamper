@@ -27,7 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0C510A9A1BAE8CEE006AF12B /* pdfstamper-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pdfstamper-logo.png"; sourceTree = "<group>"; };
+		0C510A9A1BAE8CEE006AF12B /* pdfstamper-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pdfstamper-logo.png"; sourceTree = SOURCE_ROOT; };
 		0C6596A81B35683F009A065F /* pdfstamper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pdfstamper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C6596AC1B35683F009A065F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C6596AD1B35683F009A065F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,8 +37,8 @@
 		0C6596BD1B35683F009A065F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C6596BE1B35683F009A065F /* pdfstamperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdfstamperTests.swift; sourceTree = "<group>"; };
 		0CE330501B37206700CA377A /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		0CE330521B3750FF00CA377A /* arc42-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arc42-logo.png"; path = "pdfstamper/arc42-logo.png"; sourceTree = "<group>"; };
-		0CE330531B3750FF00CA377A /* pdfstamper-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pdfstamper-logo.png"; path = "pdfstamper/pdfstamper-logo.png"; sourceTree = "<group>"; };
+		0CE330521B3750FF00CA377A /* arc42-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arc42-logo.png"; sourceTree = "<group>"; };
+		0CE330531B3750FF00CA377A /* pdfstamper-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pdfstamper-logo.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +59,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C65969F1B35683F009A065F = {
+		0C510A9C1BAED728006AF12B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0C510A9D1BAED763006AF12B /* GUI */ = {
 			isa = PBXGroup;
 			children = (
 				0C510A9A1BAE8CEE006AF12B /* pdfstamper-logo.png */,
 				0CE330521B3750FF00CA377A /* arc42-logo.png */,
 				0CE330531B3750FF00CA377A /* pdfstamper-logo.png */,
+				0C6596AD1B35683F009A065F /* AppDelegate.swift */,
+				0C6596AF1B35683F009A065F /* Images.xcassets */,
+				0C6596B11B35683F009A065F /* MainMenu.xib */,
+				0CE330501B37206700CA377A /* RootViewController.swift */,
+			);
+			name = GUI;
+			sourceTree = "<group>";
+		};
+		0C65969F1B35683F009A065F = {
+			isa = PBXGroup;
+			children = (
 				0C6596AA1B35683F009A065F /* pdfstamper */,
 				0C6596BB1B35683F009A065F /* pdfstamperTests */,
 				0C6596A91B35683F009A065F /* Products */,
@@ -83,10 +101,8 @@
 		0C6596AA1B35683F009A065F /* pdfstamper */ = {
 			isa = PBXGroup;
 			children = (
-				0C6596AD1B35683F009A065F /* AppDelegate.swift */,
-				0C6596AF1B35683F009A065F /* Images.xcassets */,
-				0C6596B11B35683F009A065F /* MainMenu.xib */,
-				0CE330501B37206700CA377A /* RootViewController.swift */,
+				0C510A9C1BAED728006AF12B /* Model */,
+				0C510A9D1BAED763006AF12B /* GUI */,
 				0C6596AB1B35683F009A065F /* Supporting Files */,
 			);
 			path = pdfstamper;
