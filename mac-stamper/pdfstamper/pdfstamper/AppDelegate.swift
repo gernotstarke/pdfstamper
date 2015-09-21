@@ -16,11 +16,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+        
+        print("AppDelegate: DidFinishLaunching")
 
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
+        print("AppDelegate: applicationWillTerminate")
     }
 
 

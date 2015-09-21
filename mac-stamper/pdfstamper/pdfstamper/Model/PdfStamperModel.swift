@@ -36,19 +36,36 @@ class PdfStamperModel {
     var sourceDirValid: Bool
     var sourceDirURL: NSURL
     var sourceDirName: String
+    var sourceDirStatusText: String
 
     
     /// target directory stuff
     var targetDirValid: Bool
     var targetDirURL: NSURL
-    var sourceDirName: String
+    var targetDirName: String
+    var targetDirStatusText: String
     
     
     /// constructor
     init() {
-        sourceDirValid = false
+        sourceDirName = ""
+        targetDirName = ""
+        
+        sourceDirValid = false //FileUtil.isDirectory( sourceDirName) // always be false upon init
         targetDirValid = false
+        
+        sourceDirURL = NSURL(fileURLWithPath: "")
+        targetDirURL = NSURL(fileURLWithPath: "")
+        
+        sourceDirStatusText = ""
+        targetDirStatusText = ""
         
         print("PdfStamperModel created")
     }
+    
+    
+    /// status text for directory-text fields
+    /// "no source directory selected"
+    
+    ///
 }

@@ -76,6 +76,8 @@ class RootViewController: NSViewController {
         disableTextField( sourceDirTextField )
         disableTextField( targetDirTextField )
         
+        
+        
     }
 
     
@@ -91,38 +93,34 @@ class RootViewController: NSViewController {
     private func selectSourceDirectory() {
         let openPanel = directoryOpenPanel("Select Source Directory")
         
-        // TODO: remove beginWithCompletionHandler
         if (openPanel.runModal() == NSFileHandlingPanelOKButton) {
             let fileURL = openPanel.URL!
                 //print("path = \(fileURL.path!)")
+            // TODO set values in MODEL, not directly!
             self.sourceDirTextField.stringValue = "\(fileURL.path!)"
-                self.sourceDirStatusLabelColor = self.fieldValidityToColor( true )
-                self.setSourceDirStatusLabel("\(self.nrOfPdfFilesInFolder( fileURL )) pdf files found")
-                
+            self.sourceDirStatusLabelColor = self.fieldValidityToColor( true )
+            self.setSourceDirStatusLabel("\(FileUtil.nrOfPdfFilesInFolder( fileURL )) pdf files found")
         }
         
     }
     
-    /// TODO
     private func selectTargetDirectory() {
         let openPanel = directoryOpenPanel("Select Target Directory")
         
         if (openPanel.runModal() == NSFileHandlingPanelOKButton) {
             let fileURL = openPanel.URL!
-            print("path = \(fileURL.path!)")
-            
             // Now we have a directory selected. Its URL = fileURL
             self.targetDirTextField.stringValue = "\(fileURL.path!)"
-         
-            // TODO
-            self.targetDirStatusLabelColor = NSColor.blueColor()
-            self.setTargetDirStatusLabel("\(self.nrOfPdfFilesInFolder( fileURL )) pdf files found")
+            self.targetDirStatusLabelColor = fieldValidityToColor(FileUtil.isDirectory(fileURL.path!))
+            self.setTargetDirStatusLabel("\(FileUtil.nrOfPdfFilesInFolder( fileURL )) pdf files found")
         }
-        // either user pressed cancel or any other obscure error happened
-        else {
-            
-        }
-        
+    }
+    
+/// manual text field changes
+
+    
+    @IBAction func sourceDirectoryField(sender: AnyObject) {
+        print("textField \(sender) action triggered")
     }
     
 /// disable text field
