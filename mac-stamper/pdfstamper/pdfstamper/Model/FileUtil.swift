@@ -10,9 +10,6 @@ import Foundation
 
 class FileUtil {
     
-    // 
-    static let pdfExtensions = ["pdf", "PDF"]
-    
     /// check if directory exists
     static func isDirectory(path: String) -> Bool {
         let fm = NSFileManager.defaultManager()
@@ -30,8 +27,6 @@ class FileUtil {
     
     // count nr of pdf files
     // =====================
-    
-    // TODO: restrict to pdf files!!
     static func nrOfPdfFilesInFolder( folderPath: NSURL ) -> Int {
         var count = 0
         
@@ -43,13 +38,28 @@ class FileUtil {
             includingPropertiesForKeys: keys,
             options: NSDirectoryEnumerationOptions(),
             errorHandler: nil)
-        
+      
         while let url = enumerator!.nextObject() as! NSURL! {
+          if isPdfFile(url.path! ) {
             count += 1
+          }
         }
         
         return count
     }
+  
+  
+  // collect pdf files from directory
+  static func collectPdfFiles() -> [NSURL] {
+    return []
+  }
  
-    
+  
+  // check if filename has pdf extension
+  // ===================================
+  static func isPdfFile( filePath: String) -> Bool {
+    let upperCaseFileName = filePath.uppercaseString
+    return (upperCaseFileName.hasSuffix("PDF"))
+  }
+  
 }

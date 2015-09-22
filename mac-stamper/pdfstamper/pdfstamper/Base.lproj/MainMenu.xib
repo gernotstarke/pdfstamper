@@ -228,7 +228,7 @@
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="klF-4S-nUX">
                         <rect key="frame" x="14" y="302" width="146" height="32"/>
-                        <buttonCell key="cell" type="push" title="Source directory:" bezelStyle="rounded" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iHd-mD-bgE">
+                        <buttonCell key="cell" type="push" title="Source directory:" bezelStyle="rounded" alignment="left" borderStyle="border" toolTip="select directory with pdf files to be stamped" imageScaling="proportionallyDown" inset="2" id="iHd-mD-bgE">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <connections>
@@ -236,7 +236,7 @@
                             </connections>
                         </buttonCell>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZl-CG-bSf">
+                    <button toolTip="select target directory where processed files will be stored." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZl-CG-bSf">
                         <rect key="frame" x="14" y="263" width="146" height="32"/>
                         <buttonCell key="cell" type="push" title="Target directory:" bezelStyle="rounded" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aN2-Ih-ZIC">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -281,6 +281,9 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <action selector="sourceDirectoryField:" target="1VQ-VG-HGB" id="GQk-CD-f1a"/>
+                            </connections>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgV-lb-mjF">
@@ -289,6 +292,9 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <action selector="targetDirTextField:" target="1VQ-VG-HGB" id="3rQ-vs-AKJ"/>
+                            </connections>
                         </textFieldCell>
                     </textField>
                     <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JcF-CH-0Cc">
@@ -338,16 +344,17 @@
                     </textField>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-112.5" y="160"/>
+            <point key="canvasLocation" x="-105.5" y="167"/>
         </window>
         <viewController id="1VQ-VG-HGB" customClass="RootViewController" customModule="pdfstamper" customModuleProvider="target">
             <connections>
                 <outlet property="arc42Label" destination="avj-ih-nWY" id="cOY-cA-or5"/>
                 <outlet property="sourceDirStatusLabel" destination="wPX-Xp-eBB" id="zJK-cC-Xiy"/>
                 <outlet property="sourceDirTextField" destination="gyl-15-FAd" id="dS9-EA-Pbj"/>
+                <outlet property="sourceDirectoryButton" destination="iHd-mD-bgE" id="y14-He-Uyv"/>
                 <outlet property="startButton" destination="AdR-fV-8pa" id="leD-lT-cze"/>
                 <outlet property="targetDirStatusLabel" destination="hsA-CP-fd8" id="wXo-rP-cQJ"/>
-                <outlet property="targetDirTextField" destination="pgV-lb-mjF" id="uaU-ip-4Wi"/>
+                <outlet property="targetDirTextField" destination="f87-kK-QYN" id="2Hc-mn-rqZ"/>
                 <outlet property="versionLabel" destination="nUY-dW-LRU" id="fvb-Ww-hMS"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="sKH-N1-aMV"/>
             </connections>

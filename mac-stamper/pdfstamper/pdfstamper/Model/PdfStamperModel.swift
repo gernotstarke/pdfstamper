@@ -34,6 +34,8 @@ class PdfStamperModel {
 
     /// source directory stuff
     var sourceDirValid: Bool
+  
+  // TODO: everything can be handled by property observers...
     var sourceDirURL: NSURL
     var sourceDirName: String
     var sourceDirStatusText: String
@@ -64,8 +66,8 @@ class PdfStamperModel {
     }
     
     
-    /// status text for directory-text fields
-    /// "no source directory selected"
+/// status text for directory-text fields
+/// "no source directory selected"
     
     ///
 }
