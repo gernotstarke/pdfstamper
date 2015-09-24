@@ -20,6 +20,7 @@ class RootViewController: NSViewController {
     
     // MARK labels and textfields
     
+    @IBOutlet weak var sourceDirectoryButton: NSButton!
     @IBOutlet weak var sourceDirTextField: NSTextField!
     @IBOutlet weak var sourceDirStatusLabel: NSTextField!
     var sourceDirStatusLabelColor: NSColor! = NSColor.redColor()
@@ -62,6 +63,8 @@ class RootViewController: NSViewController {
         print("arc42 label clicked")
     }
     
+    @IBAction func overwriteButton(sender: AnyObject) {
+    }
     
     
     @IBAction func helpButton(sender: AnyObject) {

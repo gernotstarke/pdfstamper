@@ -354,12 +354,12 @@
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RXf-d6-P0S">
                         <rect key="frame" x="638" y="268" width="31" height="24"/>
-                        <buttonCell key="cell" type="check" title="ow" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xc0-Jk-xd8">
+                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xc0-Jk-xd8">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="overwriteButton:" target="1VQ-VG-HGB" id="Xwo-6U-hcP"/>
+                            <action selector="overwriteButton:" target="1VQ-VG-HGB" id="oxB-Rr-Hej"/>
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nP2-rY-I89">
@@ -382,7 +382,7 @@
                 <outlet property="overwriteLabel" destination="nP2-rY-I89" id="3Bq-f7-1Ov"/>
                 <outlet property="sourceDirStatusLabel" destination="wPX-Xp-eBB" id="zJK-cC-Xiy"/>
                 <outlet property="sourceDirTextField" destination="gyl-15-FAd" id="dS9-EA-Pbj"/>
-                <outlet property="sourceDirectoryButton" destination="iHd-mD-bgE" id="y14-He-Uyv"/>
+                <outlet property="sourceDirectoryButton" destination="klF-4S-nUX" id="IPh-MJ-1mp"/>
                 <outlet property="startButton" destination="AdR-fV-8pa" id="leD-lT-cze"/>
                 <outlet property="targetDirStatusLabel" destination="hsA-CP-fd8" id="wXo-rP-cQJ"/>
                 <outlet property="targetDirTextField" destination="f87-kK-QYN" id="2Hc-mn-rqZ"/>
