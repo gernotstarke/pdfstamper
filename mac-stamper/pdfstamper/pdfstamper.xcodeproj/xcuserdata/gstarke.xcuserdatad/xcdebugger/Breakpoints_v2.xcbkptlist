@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pdfstamper/Model/FileUtil.swift"
-            timestampString = "464561102.100816"
+            timestampString = "464705112.948855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "isPdfFile(_:)"
-            landmarkType = "5">
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "FileUtil"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pdfstamper/Model/FileUtil.swift"
-            timestampString = "464561105.188482"
+            timestampString = "464705112.948855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "isPdfFile(_:)"
-            landmarkType = "5">
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "FileUtil"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

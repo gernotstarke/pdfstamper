@@ -49,8 +49,9 @@ class FileUtil {
     }
   
   
+  
   // collect pdf files from directory
-  static func collectPdfFiles() -> [NSURL] {
+    static func collectPdfFiles( folderPath: NSURL ) -> [NSURL] {
     return []
   }
  

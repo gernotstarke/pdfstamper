@@ -342,6 +342,34 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c1k-MV-rnP">
+                        <rect key="frame" x="180" y="56" width="25" height="25"/>
+                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vS3-cu-7Ea">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <connections>
+                                <action selector="helpButton:" target="1VQ-VG-HGB" id="6np-fk-tDv"/>
+                            </connections>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RXf-d6-P0S">
+                        <rect key="frame" x="638" y="268" width="31" height="24"/>
+                        <buttonCell key="cell" type="check" title="ow" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xc0-Jk-xd8">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="overwriteButton:" target="1VQ-VG-HGB" id="Xwo-6U-hcP"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nP2-rY-I89">
+                        <rect key="frame" x="568" y="273" width="65" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="overwrite:" id="COT-vK-7oR">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <point key="canvasLocation" x="-105.5" y="167"/>
@@ -349,6 +377,9 @@
         <viewController id="1VQ-VG-HGB" customClass="RootViewController" customModule="pdfstamper" customModuleProvider="target">
             <connections>
                 <outlet property="arc42Label" destination="avj-ih-nWY" id="cOY-cA-or5"/>
+                <outlet property="helpButton" destination="vS3-cu-7Ea" id="7Qd-Tl-kfR"/>
+                <outlet property="overwriteButton" destination="xc0-Jk-xd8" id="n8g-cD-7zP"/>
+                <outlet property="overwriteLabel" destination="nP2-rY-I89" id="3Bq-f7-1Ov"/>
                 <outlet property="sourceDirStatusLabel" destination="wPX-Xp-eBB" id="zJK-cC-Xiy"/>
                 <outlet property="sourceDirTextField" destination="gyl-15-FAd" id="dS9-EA-Pbj"/>
                 <outlet property="sourceDirectoryButton" destination="iHd-mD-bgE" id="y14-He-Uyv"/>
