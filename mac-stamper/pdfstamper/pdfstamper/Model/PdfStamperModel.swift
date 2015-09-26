@@ -50,8 +50,12 @@ class PdfStamperModel {
     }
     
 //    var targetPdfFileSet: [NSURL] {
-//        ge
+//        get {
+    
 //    }
+    
+    // TODO: bind this to overwrite-checkbox!!
+    var overwriteAllowed: Bool = false
     
     // can we safely create the files in the target directory?
     // conditions:
