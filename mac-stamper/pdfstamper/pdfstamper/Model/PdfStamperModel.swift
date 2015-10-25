@@ -49,10 +49,12 @@ class PdfStamperModel {
         }
     }
     
-//    var targetPdfFileSet: [NSURL] {
-//        get {
+    var targetPdfFileSet: [NSURL] {
+        get {
+            return FileUtil.collectPdfFiles( targetDirURL )
+        }
+    }
     
-//    }
     
     // TODO: bind this to overwrite-checkbox!!
     var overwriteAllowed: Bool = false
@@ -72,6 +74,7 @@ class PdfStamperModel {
             
         }
     }
+    
     var targetDirURL: NSURL {
         didSet {
             
