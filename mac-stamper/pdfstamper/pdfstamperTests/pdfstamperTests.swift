@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import pdfstamper
+
 class pdfstamperTests: XCTestCase {
     
     override func setUp() {
@@ -26,11 +28,14 @@ class pdfstamperTests: XCTestCase {
         XCTAssert(true, "Pass")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
+    // if no directory has been selected,
+    // it should always be invalid!
+    func emptyDirIsNotValid() {
+        var myModel = PdfStamperModel()
+        myModel.sourceDirURL = NSURL( fileURLWithPath: "")
+        
+        XCTAssertEqual(myModel.sourceDirValid, false, "empty dir name should be invalid")
+        
     }
     
 }
